@@ -4,7 +4,8 @@ import * as C from '../../constants'
 import * as A from '../../actions'
 
 const mapStateToProps = (store, ownProps) => ({
-    test: store.app.init_data
+    test: store.app.init_data,
+    cookie: store.app.cookie
 })
 
 const mapDispatchToProps = (dispatch) => {

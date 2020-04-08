@@ -1,0 +1,24 @@
+{
+  "name": "crowdittdb",
+  "version": "1.0.0",
+  "description": "Relational Database for Crowddit Service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Indivism/crowddit/tree/ui/nodeDB"
+  },
+  "author": "Jack Gronenthal",
+  "license": "ISC",
+  "dependencies": {
+    "morgan": "^1.10.0",
+    "redux-thunk": "^2.3.0",
+    "sqlite3": "^4.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}

@@ -9,10 +9,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import * as serviceWorker from './serviceWorker';
 import Routes from './routes'
+import thunk from 'redux-thunk'
+
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(logger)
+  applyMiddleware(thunk, logger)
 )
 
 window.store = store

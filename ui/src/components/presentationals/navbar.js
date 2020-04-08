@@ -16,6 +16,7 @@ const NavigationBar = (props) => {
 
     const toggle = () => setIsOpen(!isOpen);
 
+
     return (
     <div>
       <Navbar color="light" light expand="md">
@@ -31,7 +32,8 @@ const NavigationBar = (props) => {
             </NavItem>
           </Nav>
         </Collapse>
-        <Button outline color="secondary" onClick={ () => props.login() }>Log In</Button>
+        {props.cookie && <Button outline color="secondary" onClick={ () => props.login() }>Logged In</Button>}
+        {!props.cookie && <Button outline color="secondary" onClick={ () => props.login() }>Log In</Button>}
       </Navbar>
     </div>
     )
