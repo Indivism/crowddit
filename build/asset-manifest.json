@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/crowddit/static/css/main.df1bad64.chunk.css",
+    "main.js": "/crowddit/static/js/main.393e93d6.chunk.js",
+    "main.js.map": "/crowddit/static/js/main.393e93d6.chunk.js.map",
+    "runtime-main.js": "/crowddit/static/js/runtime-main.745c987f.js",
+    "runtime-main.js.map": "/crowddit/static/js/runtime-main.745c987f.js.map",
+    "static/css/2.de424728.chunk.css": "/crowddit/static/css/2.de424728.chunk.css",
+    "static/js/2.988df126.chunk.js": "/crowddit/static/js/2.988df126.chunk.js",
+    "static/js/2.988df126.chunk.js.map": "/crowddit/static/js/2.988df126.chunk.js.map",
+    "index.html": "/crowddit/index.html",
+    "precache-manifest.3d8ed474935fdde5b7bbb8e130f7fb89.js": "/crowddit/precache-manifest.3d8ed474935fdde5b7bbb8e130f7fb89.js",
+    "service-worker.js": "/crowddit/service-worker.js",
+    "static/css/2.de424728.chunk.css.map": "/crowddit/static/css/2.de424728.chunk.css.map",
+    "static/css/main.df1bad64.chunk.css.map": "/crowddit/static/css/main.df1bad64.chunk.css.map",
+    "static/js/2.988df126.chunk.js.LICENSE.txt": "/crowddit/static/js/2.988df126.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/crowddit/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.745c987f.js",
+    "static/css/2.de424728.chunk.css",
+    "static/js/2.988df126.chunk.js",
+    "static/css/main.df1bad64.chunk.css",
+    "static/js/main.393e93d6.chunk.js"
+  ]
+}
