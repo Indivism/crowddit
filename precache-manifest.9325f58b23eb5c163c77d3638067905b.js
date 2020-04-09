@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8b6119bdbd25fc8ad10b5b98d11bc660",
+    "revision": "5f8bf4af85900ee0a6191cb4552ad6ba",
     "url": "/crowddit/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/crowddit/static/css/2.de424728.chunk.css"
   },
   {
-    "revision": "b85f4f27c9b32cdaee79",
+    "revision": "11d78f05f93e9838e7ac",
     "url": "/crowddit/static/css/main.df1bad64.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/crowddit/static/js/2.7311c5ac.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b85f4f27c9b32cdaee79",
-    "url": "/crowddit/static/js/main.9677c48f.chunk.js"
+    "revision": "11d78f05f93e9838e7ac",
+    "url": "/crowddit/static/js/main.968d947d.chunk.js"
   },
   {
     "revision": "aaa96bcaeed9efa5ad94",
