@@ -76,6 +76,22 @@ router.get('/checkPassword', (request, response, next) => {
     return
 })
 
+router.get('/getAssociations', (request, response, next) => {
+    const { crowddit } = request.query
+
+    const data = getAssociations(crowddit.toUpperCase())
+
+    response.status(200).json({ data })
+})
+
+router.get('/setAssociation', (request, response, next) => {
+    const { crowddit, reddit } = request.query
+
+    const data = setAssociation(crowddit.toUpperCase(), reddit.trim())
+
+    response.status(200).json({ data })
+})
+
 router.get('/createUser', (request, response, next) => {
     const { username, password } = request.query
     
@@ -144,5 +160,25 @@ const insertUser = (username, password) => {
     return data;
 }
 
+const getAssociations = crowddit => {
+    const db = open();
+    const statement = db.prepare('SELECT * FROM Usernames WHERE crowddit = ?');
+    const data = statement.get(crowddit)
+    close(db);
+    return data;
+}
+
+const setAssociation = (crowddit, reddit) => {
+    const db = open();
+    const statement = db.prepare(`
+        INSERT INTO Usernames(Crowddit, Reddit) 
+        VALUES(?, ?)
+        ON CONFLICT(Crowddit)
+        DO UPDATE SET Reddit = ?
+    `);
+    const data = statement.run(crowddit, reddit, reddit)
+    close(db);
+    return data;
+}
 
 module.exports = router;
