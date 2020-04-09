@@ -14,7 +14,8 @@ export default (state = INITIAL, action) => {
         case C.TOGGLE_LOGIN:
             return {
                 ...state,
-                showLoginModal: !state.showLoginModal
+                showLoginModal: !state.showLoginModal,
+                invalidLoginAttempt: false
             }
         case C.USERNAME_BLUR:
             return {
