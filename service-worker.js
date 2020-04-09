@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/crowddit/precache-manifest.9325f58b23eb5c163c77d3638067905b.js"
+  "/crowddit/precache-manifest.d1b944495657ee8d44f29c99abb28076.js"
 );
 
 self.addEventListener('message', (event) => {
