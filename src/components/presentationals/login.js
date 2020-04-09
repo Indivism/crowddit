@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal, Container, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 import Blob from './blob'
+import * as C from '../../Constants'
 
 const ModalExample = (props) => {
   const {
@@ -40,7 +41,7 @@ const ModalExample = (props) => {
                     </div>
                     <div className="row" style={{fontSize: "small", paddingTop: '1rem'}}>
                         <p> New to Crowddit? </p>
-                        <a href="http://localhost:3000/createUser" style={{paddingLeft: '0.5rem', fontWeight: "bold"}}> SIGN UP </a>
+                        <a href= {C.HEROKU_BACKEND + "createUser"} style={{paddingLeft: '0.5rem', fontWeight: "bold"}}> SIGN UP </a>
                     </div>
                 </div>
             </div>

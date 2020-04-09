@@ -7,3 +7,5 @@ export let LOGOUT = 'LOGOUT'
 export let LOGIN = 'LOGIN'
 export let INVALID_LOGIN = 'INVALID_LOGIN'
 export let DISMISS_LOGIN_ALERT = 'DISMISS_LOGIN_ALERT'
+
+export let HEROKU_BACKEND = 'https://crowddit-backend.herokuapp.com'

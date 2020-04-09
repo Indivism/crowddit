@@ -7,7 +7,7 @@ export let toggleLogin = () => {
 
 export let usernameBlur = async payload => {
 
-    let url = "http://localhost:3001/db/checkUsername?" + querystring.stringify({username: payload})
+    let url = C.HEROKU_BACKEND + "/db/checkUsername?" + querystring.stringify({username: payload})
     
     let options = {
         method: 'GET'
@@ -26,7 +26,7 @@ export let usernameBlur = async payload => {
 
 export let passwordBlur = async payload => {
 
-    let url = "http://localhost:3001/db/checkPassword?" + querystring.stringify({password: payload})
+    let url = C.HEROKU_BACKEND + "/db/checkPassword?" + querystring.stringify({password: payload})
     
     let options = {
         method: 'GET'
@@ -51,7 +51,7 @@ export let createUser = async () => {
 
     console.log(username, password)
 
-    let url = "http://localhost:3001/db/createUser?" + querystring.stringify({username, password})
+    let url = C.HEROKU_BACKEND + "/db/createUser?" + querystring.stringify({username, password})
     
     let options = {
         method: 'GET'
@@ -66,7 +66,7 @@ export let createUser = async () => {
     if(response.status == 'success') {
         console.log("setting cookie")
         document.cookie = 'crowddit=' + response.username
-        document.location = 'http://localhost:3000/'
+        document.location = 'https://indivism.github.io/crowddit/'
         return {type: C.CREATE_USER, payload: { status: true, username }}
     } else {
         return {type: C.CREATE_USER, payload: { status: false, username }}
@@ -85,7 +85,7 @@ export let logout = () => {
 
 export let login = async ({ username, password }) => {
 
-    let url = "http://localhost:3001/db/login?" + querystring.stringify({username, password})
+    let url = HEROKU_BACKEND + "/db/login?" + querystring.stringify({username, password})
 
     let options = {
         method: 'GET'
