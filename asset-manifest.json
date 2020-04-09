@@ -1,26 +1,26 @@
 {
   "files": {
     "main.css": "/crowddit/static/css/main.df1bad64.chunk.css",
-    "main.js": "/crowddit/static/js/main.37a199be.chunk.js",
-    "main.js.map": "/crowddit/static/js/main.37a199be.chunk.js.map",
+    "main.js": "/crowddit/static/js/main.58278ff2.chunk.js",
+    "main.js.map": "/crowddit/static/js/main.58278ff2.chunk.js.map",
     "runtime-main.js": "/crowddit/static/js/runtime-main.745c987f.js",
     "runtime-main.js.map": "/crowddit/static/js/runtime-main.745c987f.js.map",
     "static/css/2.de424728.chunk.css": "/crowddit/static/css/2.de424728.chunk.css",
-    "static/js/2.7e5c318f.chunk.js": "/crowddit/static/js/2.7e5c318f.chunk.js",
-    "static/js/2.7e5c318f.chunk.js.map": "/crowddit/static/js/2.7e5c318f.chunk.js.map",
+    "static/js/2.15a44dc6.chunk.js": "/crowddit/static/js/2.15a44dc6.chunk.js",
+    "static/js/2.15a44dc6.chunk.js.map": "/crowddit/static/js/2.15a44dc6.chunk.js.map",
     "index.html": "/crowddit/index.html",
-    "precache-manifest.34f3d7b2fc71ca667d08d277846c9925.js": "/crowddit/precache-manifest.34f3d7b2fc71ca667d08d277846c9925.js",
+    "precache-manifest.8b7aec406cc97f65a421272d81831709.js": "/crowddit/precache-manifest.8b7aec406cc97f65a421272d81831709.js",
     "service-worker.js": "/crowddit/service-worker.js",
     "static/css/2.de424728.chunk.css.map": "/crowddit/static/css/2.de424728.chunk.css.map",
     "static/css/main.df1bad64.chunk.css.map": "/crowddit/static/css/main.df1bad64.chunk.css.map",
-    "static/js/2.7e5c318f.chunk.js.LICENSE.txt": "/crowddit/static/js/2.7e5c318f.chunk.js.LICENSE.txt",
+    "static/js/2.15a44dc6.chunk.js.LICENSE.txt": "/crowddit/static/js/2.15a44dc6.chunk.js.LICENSE.txt",
     "static/media/logo.svg": "/crowddit/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.745c987f.js",
     "static/css/2.de424728.chunk.css",
-    "static/js/2.7e5c318f.chunk.js",
+    "static/js/2.15a44dc6.chunk.js",
     "static/css/main.df1bad64.chunk.css",
-    "static/js/main.37a199be.chunk.js"
+    "static/js/main.58278ff2.chunk.js"
   ]
 }
