@@ -8,7 +8,6 @@ const Database = require('better-sqlite3');
 // 0 -> Invalid Username
 // 1 -> Invalid Password
 // 2 -> Username already exists
-
 router.get('/login', (request, response, next) => {
     const { username, password } = request.query
 
@@ -79,7 +78,7 @@ router.get('/checkPassword', (request, response, next) => {
 router.get('/getAssociations', (request, response, next) => {
     const { crowddit } = request.query
 
-    const data = getAssociations(crowddit.toUpperCase)
+    const data = getAssociations(crowddit.toUpperCase())
 
     response.status(200).json({ data })
 })
@@ -161,8 +160,11 @@ const insertUser = (username, password) => {
 }
 
 const getAssociations = crowddit => {
+
+    console.log(crowddit)
+
     const db = open();
-    const statement = db.prepare('SELECT * FROM Usernames WHERE crowddit = ?');
+    const statement = db.prepare('SELECT Reddit FROM Usernames WHERE crowddit = ?');
     const data = statement.get(crowddit)
     close(db);
     return data;
