@@ -103,3 +103,5 @@ export let login = async ({ username, password }) => {
         return { type: C.INVALID_LOGIN }
     }
 }
+
+export let dismissLoginAlert = () => ({ type: C.DISMISS_LOGIN_ALERT })

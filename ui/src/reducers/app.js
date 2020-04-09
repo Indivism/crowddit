@@ -4,7 +4,8 @@ const INITIAL = {
     showLoginModal: false,
     validUsername: null,
     cookie: document.cookie.includes('crowddit='),
-    username: document.cookie.slice(document.cookie.indexOf('crowddit') + 9)
+    username: document.cookie.slice(document.cookie.indexOf('crowddit') + 9),
+    invalidLoginAttempt: false
 }
 
 export default (state = INITIAL, action) => {
@@ -45,9 +46,21 @@ export default (state = INITIAL, action) => {
                 ...state,
                 showLoginModal: false,
                 username: action.payload.username,
-                cookie: true
+                cookie: true,
+                invalidLoginAttempt: false
             }
         }
+        case C.INVALID_LOGIN: {
+            return {
+                ...state,
+                invalidLoginAttempt: true
+            }
+        }
+        case C.DISMISS_LOGIN_ALERT:
+            return {
+                ...state,
+                invalidLoginAttempt: false
+            }
 
         default:
             return state

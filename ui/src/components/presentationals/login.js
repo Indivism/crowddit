@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-import { Button, Modal, Container, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
+import { Button, Modal, Container, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 import Blob from './blob'
 
 const ModalExample = (props) => {
   const {
-    buttonLabel,
     className
   } = props;
 
-  const [modal, setModal] = useState(false);
+  console.log(props)
 
   return (
     <Container>
         <Modal isOpen={props.modal} toggle={props.toggle} className={className} centered>
-            <div className="row" style={{height: 300}}>
+            <div className="row" style={{height: 350}}>
                 <div className="col-sm-3" id="login-gradient-box"></div>
                 <div className="col" style={{marginLeft: '1rem'}}>
                     <div className="row" id="login-text">Sign in</div>
@@ -31,7 +30,12 @@ const ModalExample = (props) => {
                                 <Label for="inputPassword" hidden>Password</Label>
                                 <Input type="password" name="password" id="inputPassword" placeholder="Password" />
                             </FormGroup>
-                            <Button id='login-text-button'>SIGN IN</Button>
+                            {!props.invalidLoginAttempt && <Button style={{height: '2rem'}} id='login-text-button'>SIGN IN</Button>}
+                            <Alert 
+                            color="danger"
+                            isOpen={props.invalidLoginAttempt}
+                            toggle={() => { props.dismissLoginAttemptAlert() }}>
+                                Invalid username or password</Alert>
                         </Form>
                     </div>
                     <div className="row" style={{fontSize: "small", paddingTop: '1rem'}}>
