@@ -23,11 +23,6 @@ router.get('/savedposts', (request, response, next) => {
 
 })
 
-router.get('/auth', (request, response, next) => {
-    console.log(request)
-    response.status(200).message({ request })
-} )
-
 router.get('/authUI', (request, response, next) => {
     const state = crypto.randomBytes(16).toString('base64');
 
@@ -40,7 +35,7 @@ router.get('/authUI', (request, response, next) => {
 
     const params = {
         state,
-        redirect_uri: 'https://crowddit-backend.herokuapp.com/reddit/auth',
+        redirect_uri: 'https://crowddit-backend.herokuapp.com:65010/reddit/auth',
         ...results
     }
 
@@ -96,7 +91,7 @@ let listenForCallback = (state, results) => {
         } else {
           handleError(res, { statusCode: 400, statusMessage: 'Failed to parse response from reddit' }, state, results);
         }
-      }).listen();
+      }).listen(65010);
 }
 
 
