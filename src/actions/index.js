@@ -8,6 +8,9 @@ export let toggleLogin = () => {
 
 export let usernameBlur = async payload => {
 
+    if(payload === "")
+        return { type: C.DEFAULT }
+
     let url = C.HEROKU_BACKEND + "/db/checkUsername?" + querystring.stringify({username: payload})
     
     let options = {
@@ -27,6 +30,9 @@ export let usernameBlur = async payload => {
 
 export let passwordBlur = async payload => {
 
+    if(payload === "")
+        return { type: C.DEFAULT }
+
     let url = C.HEROKU_BACKEND + "/db/checkPassword?" + querystring.stringify({password: payload})
     
     let options = {
@@ -39,7 +45,7 @@ export let passwordBlur = async payload => {
         .catch(err => console.log(err))
 
     if(response && response.status) {
-        return {type: C.PASSWORD_BLUR, payload: { status: response.status == 'success' ? true : false }}
+        return {type: C.PASSWORD_BLUR, payload: { status: response.status === 'success' ? true : false }}
     } else {
         return {type: C.PASSWORD_BLUR, payload: { status: false }}
     }
@@ -48,9 +54,12 @@ export let passwordBlur = async payload => {
 export let createUser = async () => {
     
     let username = document.getElementById("username-input").value.trim()
-    let password = document.getElementById("password-input").value.trim() 
+    let password = document.getElementById("password-input").value.trim()
 
     console.log(username, password)
+
+    if(username === password && username === "")
+        return { type: C.CREATE_USER_ALERT }
 
     let url = C.HEROKU_BACKEND + "/db/createUser?" + querystring.stringify({username, password})
     
@@ -67,7 +76,6 @@ export let createUser = async () => {
     if(response.status == 'success') {
         console.log("setting cookie")
         document.cookie = 'crowddit=' + response.username
-        // document.location = 'https://indivism.github.io/crowddit/'
         return {type: C.CREATE_USER, payload: { status: true, username }}
     } else {
         return {type: C.CREATE_USER, payload: { status: false, username }}
@@ -106,3 +114,14 @@ export let login = async ({ username, password }) => {
 }
 
 export let dismissLoginAlert = () => ({ type: C.DISMISS_LOGIN_ALERT })
+
+export let toggleCreateAccountAlert = () => {
+    let username = document.getElementById("username-input").value.trim() === ""
+    let password = document.getElementById("password-input").value.trim() === ""
+    console.log("check me: ", username, password)
+    if(username && password) {
+        return { type: C.CREATE_USER_ALERT }
+    } else {
+        return { type: C.DEFAULT }
+    }
+}
