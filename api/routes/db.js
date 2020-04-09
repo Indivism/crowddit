@@ -8,7 +8,6 @@ const Database = require('better-sqlite3');
 // 0 -> Invalid Username
 // 1 -> Invalid Password
 // 2 -> Username already exists
-
 router.get('/login', (request, response, next) => {
     const { username, password } = request.query
 
@@ -74,6 +73,22 @@ router.get('/checkPassword', (request, response, next) => {
 
     response.status(200).json({status: "success", message: "Valid Password.", password})
     return
+})
+
+router.get('/getAssociations', (request, response, next) => {
+    const { crowddit } = request.query
+
+    const data = getAssociations(crowddit.toUpperCase())
+
+    response.status(200).json({ data })
+})
+
+router.get('/setAssociation', (request, response, next) => {
+    const { crowddit, reddit } = request.query
+
+    const data = setAssociation(crowddit.toUpperCase(), reddit.trim())
+
+    response.status(200).json({ data })
 })
 
 router.get('/createUser', (request, response, next) => {
@@ -144,5 +159,28 @@ const insertUser = (username, password) => {
     return data;
 }
 
+const getAssociations = crowddit => {
+
+    console.log(crowddit)
+
+    const db = open();
+    const statement = db.prepare('SELECT Reddit FROM Usernames WHERE crowddit = ?');
+    const data = statement.get(crowddit)
+    close(db);
+    return data;
+}
+
+const setAssociation = (crowddit, reddit) => {
+    const db = open();
+    const statement = db.prepare(`
+        INSERT INTO Usernames(Crowddit, Reddit) 
+        VALUES(?, ?)
+        ON CONFLICT(Crowddit)
+        DO UPDATE SET Reddit = ?
+    `);
+    const data = statement.run(crowddit, reddit, reddit)
+    close(db);
+    return data;
+}
 
 module.exports = router;

@@ -16,6 +16,7 @@ const redditRoutes = require('./api/routes/reddit')
 app.use('/db', dbRoutes)
 app.use('/reddit', redditRoutes)
 
+
 app.use((request, response, next) => {
     const error = new Error('Server working');
     error.status = 404;
