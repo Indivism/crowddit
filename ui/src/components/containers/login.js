@@ -8,7 +8,8 @@ const mapStateToProps = (store, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    toggle: () => dispatch(A.toggleLogin())
+    toggle: () => dispatch(A.toggleLogin()),
+    login: async fields => dispatch(await A.login(fields))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

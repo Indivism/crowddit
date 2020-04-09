@@ -9,7 +9,7 @@ const mapStateToProps = (store, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    emailBlur: async e =>  dispatch(await A.emailBlur(e)),
+    usernameBlur: async e =>  dispatch(await A.usernameBlur(e)),
     passwordBlur: async e => dispatch(await A.passwordBlur(e)),
     createUser: async e => { dispatch(await A.createUser()); dispatch(A.cookie()) }
 })
