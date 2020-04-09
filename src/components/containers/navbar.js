@@ -6,13 +6,15 @@ import * as A from '../../actions'
 const mapStateToProps = (store, ownProps) => ({
     test: store.app.init_data,
     cookie: store.app.cookie,
-    username: store.app.username
+    username: store.app.username,
+    page: store.app.page
 })
 
 const mapDispatchToProps = (dispatch) => {
     return {
         login: () => { dispatch(A.toggleLogin()) },
-        logout: () => { dispatch(A.logout()) }
+        logout: () => { dispatch(A.logout()) },
+        setPage: page => { dispatch(A.setPage(page)) }
     }
 }
 

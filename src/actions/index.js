@@ -125,3 +125,5 @@ export let toggleCreateAccountAlert = () => {
         return { type: C.DEFAULT }
     }
 }
+
+export let setPage = page => ({ type: C.SET_PAGE, payload: page })

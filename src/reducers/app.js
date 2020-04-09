@@ -6,7 +6,8 @@ const INITIAL = {
     cookie: document.cookie.includes('crowddit='),
     username: document.cookie.slice(document.cookie.indexOf('crowddit') + 9),
     invalidLoginAttempt: false,
-    createUserAlert: false
+    createUserAlert: false,
+    page: "/"
 }
 
 export default (state = INITIAL, action) => {
@@ -71,6 +72,12 @@ export default (state = INITIAL, action) => {
             return {
                 ...state,
                 createUserAlert: true
+            }
+        }
+        case C.SET_PAGE: {
+            return {
+                ...state,
+                page: action.payload
             }
         }
 
