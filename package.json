@@ -17,6 +17,7 @@
     "better-sqlite3": "^6.0.1",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
+    "node-fetch": "^2.6.0",
     "react-router-dom": "^5.1.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
