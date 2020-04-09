@@ -11,11 +11,13 @@ app.use(function(req, res, next) {
   });
   
 const dbRoutes = require('./api/routes/db')
+const redditRoutes = require('./api/routes/reddit')
 
 app.use('/db', dbRoutes)
+app.use('/reddit', redditRoutes)
 
 app.use((request, response, next) => {
-    const error = new Error('Not Found');
+    const error = new Error('Server working');
     error.status = 404;
     next(error);
 })
