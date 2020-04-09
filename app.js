@@ -14,6 +14,7 @@ const dbRoutes = require('./api/routes/db')
 
 app.use('/db', dbRoutes)
 
+
 app.use((request, response, next) => {
     const error = new Error('Not Found');
     error.status = 404;
