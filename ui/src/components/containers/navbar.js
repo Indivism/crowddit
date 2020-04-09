@@ -5,12 +5,14 @@ import * as A from '../../actions'
 
 const mapStateToProps = (store, ownProps) => ({
     test: store.app.init_data,
-    cookie: store.app.cookie
+    cookie: store.app.cookie,
+    username: store.app.username
 })
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        login: () => { dispatch(A.toggleLogin()) }
+        login: () => { dispatch(A.toggleLogin()) },
+        logout: () => { dispatch(A.logout()) }
     }
 }
 

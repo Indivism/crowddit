@@ -10,7 +10,7 @@ export default props => {
             <NavigationBar  />
             <div className="container" style={{marginTop: '3rem'}}>
             <Form onSubmit={e => { e.preventDefault(); props.createUser()}}>
-                <FormGroup onBlur={ e => props.emailBlur(e.target.value.trim()) }>
+                <FormGroup onBlur={ e => props.usernameBlur(e.target.value.trim()) }>
                     <Label for="exampleEmail">Username</Label>
                     <Input 
                         id="username-input" 

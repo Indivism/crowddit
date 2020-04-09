@@ -14,8 +14,10 @@
   "author": "Jack Gronenthal",
   "license": "ISC",
   "dependencies": {
+    "better-sqlite3": "^6.0.1",
     "morgan": "^1.10.0",
     "redux-thunk": "^2.3.0",
+    "sqlite-async": "^1.0.12",
     "sqlite3": "^4.1.1"
   },
   "devDependencies": {

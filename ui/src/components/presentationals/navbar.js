@@ -32,7 +32,8 @@ const NavigationBar = (props) => {
             </NavItem>
           </Nav>
         </Collapse>
-        {props.cookie && <Button outline color="secondary" onClick={ () => props.login() }>Logged In</Button>}
+        {props.cookie && <NavbarText style={{paddingRight: "1rem"}}>{props.username}</NavbarText>}
+        {props.cookie && <Button outline color="secondary" onClick={ () => props.logout() }>Log Out</Button>}
         {!props.cookie && <Button outline color="secondary" onClick={ () => props.login() }>Log In</Button>}
       </Navbar>
     </div>

@@ -2,22 +2,39 @@ const express = require('express');
 const fetch = require('node-fetch');
 // const querystring = require('querystring');
 const router = express.Router();
-const sqlite3 = require('sqlite3').verbose();
-var db = {}
+const Database = require('better-sqlite3');
 
 // Error Codes
 // 0 -> Invalid Username
 // 1 -> Invalid Password
 // 2 -> Username already exists
 
-router.get('/checkUsername', (request, response, next) => {
-    db = open()
+router.get('/login', (request, response, next) => {
+    const { username, password } = request.query
 
+    const data = login(username.toUpperCase().trim(), password.trim())
+    
+    if(data) {
+        response.status(200).cookie('crowddit', username.trim()).json({
+            status: "success",
+            message: "Logged in.",
+            username: username.trim()
+        })
+    } else {
+        response.status(404).json({
+            status: "failure",
+            message: "Invalid username or password.",
+            username: null
+        })
+    }
+})
+
+router.get('/checkUsername', (request, response, next) => {
     const { username } = request.query
 
     // Check that username is valid
     const username_regex = /^([A-Za-z0-9]){4,20}$/
-    console.log(username.trim().match(username_regex))
+
     if(username.match(username_regex) == null) {
         console.log("Invalid Username")
         response.status(404).json({
@@ -29,43 +46,22 @@ router.get('/checkUsername', (request, response, next) => {
         return
     }
 
-    db.all(`SELECT * FROM Credentials`, [], (err, rows) => {
-            if (err) {
-                console.error(err.message)
-                response.status(500).json({
-                    message: err
-                })
-                close()
-                return
-            } else {
-                rows.forEach(row => { 
-                    console.log(row.Username, username.toUpperCase().trim())
-                    if(row.Username.toUpperCase() == username.toUpperCase().trim()) {
-                        response.status(404).json({
-                            status: "fail",
-                            errCode: 1,
-                            message: "Username already exists."
-                        })
-                        close()
-                        return
-                    } 
-                })
-            }
-        }
-    )
+    const data = checkUsername(username)
 
-    response.status(200).json({status: "success", message: "Valid Username.", username})
-    close()
+    console.log("checkUsername", data)
+
+    response.status(data ? 404 : 200).json({
+        status: data ? "fail" : "success",
+        message: data ? "Username is already taken." : "Username is valid!" 
+    })
 })
 
 router.get('/checkPassword', (request, response, next) => {
-    db = open()
-
     const { password } = request.query
 
     // Check that username is valid
     const password_regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
-    console.log(password.trim().match(password_regex))
+
     if(password.match(password_regex) == null) {
         console.log("Invalid Password")
         response.status(404).json({
@@ -77,13 +73,10 @@ router.get('/checkPassword', (request, response, next) => {
     }
 
     response.status(200).json({status: "success", message: "Valid Password.", password})
-    close()
     return
 })
 
 router.get('/createUser', (request, response, next) => {
-    db = open()
-
     const { username, password } = request.query
     
     // Check that username is valid
@@ -113,70 +106,43 @@ router.get('/createUser', (request, response, next) => {
     console.log("Valid Username: ", username)
 
     // Check if Username already exists
-    db.all(`SELECT * FROM Credentials`, [], (err, rows) => {
-        try {
-            if (err) {
-                console.error(err.message)
-                response.status(500).json({
-                    status: "fail",
-                    errCode: 1,
-                    message: "Username already exists."
-                })
-                close()
-                return
-            } else {
-                rows.forEach(row => { 
-                    console.log(row.Username, username.toUpperCase().trim())
-                    if(row.Username.toUpperCase() == username.toUpperCase().trim()) {
-                        response.status(404).json({
-                            status: "fail",
-                            errCode: 1,
-                            message: "Username already exists."
-                        })
-                        close()
-                        return
-                    } 
-                })
-            }
-        } catch(err) {
-            response.status(500).json({
-                message: err
-            })
-            return
-        }
-    })
+    const data_username = checkUsername(username)
+    if(data_username) {
+        response.status(404).json({status: "fail", message: "Username is already taken."})
+        return
+    }
 
-    // Username does not already exist! -> Create the user
-    db.run(`INSERT INTO Credentials(Username,Password) VALUES(?,?)`, [username, password], err => {
-        if(err) {
-            return console.error(err.message)
-        } else {
-            console.log("successful insert")
-        }
-    })
-    response.setHeader('Set-Cookie', ['crowddit=' + username]);
-    response.status(200).json({ status: "success", message: "User account created.", username})
-    close()
+    const data_insert = insertUser(username.toUpperCase().trim(), password.trim());
+    response.status(200).cookie('crowddit', username + ';').json({ status: "success", message: "User account created.", username})
 })
 
-const open = () => {
-    db = new sqlite3.Database('./crowddit.db', sqlite3.OPEN_READWRITE, (err) => {
-        if (err) {
-          return console.error(err.message);
-        }
-        console.log('Connected to the in-memory SQlite database.');
-      });
-    console.log(db)
-    return db;
+const open = () => { return new Database('./crowddit.db', { verbose: console.log })};
+
+const close = db => { db.close() };
+
+const login = (username, password) => {
+    const db = open();
+    const statement = db.prepare('SELECT * FROM Credentials WHERE Username = ? AND Password = ?');
+    const data = statement.get(username, password);
+    close(db);
+    return data;
+}
+
+const checkUsername = username => {
+    const db = open()
+    const statement = db.prepare('SELECT * FROM Credentials WHERE Username = ?');
+    const data = statement.get(username.toUpperCase());
+    close(db)
+    return data;
 };
 
-const close = () => {
-    db.close((err) => {
-        if (err) {
-          return console.error(err.message);
-        }
-        console.log('Close the database connection.');
-      });
-};
+const insertUser = (username, password) => {
+    const db = open();
+    const statement = db.prepare('INSERT INTO Credentials(Username, Password) VALUES(?, ?)');
+    const data = statement.run(username, password);
+    close(db);
+    return data;
+}
+
 
 module.exports = router;

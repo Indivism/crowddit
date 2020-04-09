@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Modal, Container, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Modal, Container, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
 import Blob from './blob'
 
 const ModalExample = (props) => {
@@ -18,10 +18,14 @@ const ModalExample = (props) => {
                 <div className="col" style={{marginLeft: '1rem'}}>
                     <div className="row" id="login-text">Sign in</div>
                     <div className="row" style={{paddingTop: '1rem'}}>
-                        <Form>
+                        <Form onSubmit={ e => { e.preventDefault(); props.login({
+                            username: document.getElementById('inputUsername').value, 
+                            password: document.getElementById('inputPassword').value
+                            }) }}>
                             <FormGroup>
                                 <Label for="exampleEmail" hidden>Username</Label>
                                 <Input type="username" name="username" id="inputUsername" placeholder="Username" />
+                  
                             </FormGroup>
                             <FormGroup>
                                 <Label for="inputPassword" hidden>Password</Label>
