@@ -1,6 +1,6 @@
 {
   "name": "crowddit",
-  "homepage": "https://indivism.github.io/crowddit ",
+  "homepage": "https://indivism.github.io/crowddit/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -11,7 +11,6 @@ import * as serviceWorker from './serviceWorker';
 import Routes from './routes'
 import thunk from 'redux-thunk'
 
-
 const store = createStore(
   rootReducer,
   applyMiddleware(thunk, logger)

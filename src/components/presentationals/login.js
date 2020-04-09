@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Modal, Container, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 import Blob from './blob'
-import * as C from '../../Constants'
+import * as C from '../../constants'
+import { Link } from 'react-router-dom'
 
 const ModalExample = (props) => {
   const {
@@ -41,7 +42,7 @@ const ModalExample = (props) => {
                     </div>
                     <div className="row" style={{fontSize: "small", paddingTop: '1rem'}}>
                         <p> New to Crowddit? </p>
-                        <a href= {C.HEROKU_BACKEND + "createUser"} style={{paddingLeft: '0.5rem', fontWeight: "bold"}}> SIGN UP </a>
+                        <Link to='/createUser' style={{paddingLeft: '0.5rem', fontWeight: "bold"}}> SIGN UP </Link>
                     </div>
                 </div>
             </div>

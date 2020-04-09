@@ -1,6 +1,7 @@
 import * as C from '../constants'
 import querystring from 'query-string'
 
+
 export let toggleLogin = () => {
     return { type: C.TOGGLE_LOGIN }
 }
@@ -66,7 +67,7 @@ export let createUser = async () => {
     if(response.status == 'success') {
         console.log("setting cookie")
         document.cookie = 'crowddit=' + response.username
-        document.location = 'https://indivism.github.io/crowddit/'
+        // document.location = 'https://indivism.github.io/crowddit/'
         return {type: C.CREATE_USER, payload: { status: true, username }}
     } else {
         return {type: C.CREATE_USER, payload: { status: false, username }}
@@ -85,7 +86,7 @@ export let logout = () => {
 
 export let login = async ({ username, password }) => {
 
-    let url = HEROKU_BACKEND + "/db/login?" + querystring.stringify({username, password})
+    let url = C.HEROKU_BACKEND + "/db/login?" + querystring.stringify({username, password})
 
     let options = {
         method: 'GET'

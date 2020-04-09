@@ -10,6 +10,7 @@ import {
     NavLink,
     NavbarText
   } from 'reactstrap';
+import { Link } from 'react-router-dom'
 
 const NavigationBar = (props) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +21,7 @@ const NavigationBar = (props) => {
     return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">crowddit</NavbarBrand>
+        <NavbarBrand href={'https://indivism.github.io/crowddit/'}>crowddit</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
