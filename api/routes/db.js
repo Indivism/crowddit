@@ -79,7 +79,7 @@ router.get('/checkPassword', (request, response, next) => {
 router.get('/getAssociations', (request, response, next) => {
     const { crowddit } = request.query
 
-    const data = getAssociations(crowddit.toUpperCase())
+    const data = getAssociations(crowddit.toUpperCase)
 
     response.status(200).json({ data })
 })
