@@ -19,7 +19,6 @@ router.get('/auth', (request, response, next) => {
 
   open(auth_url)  
   response.status(200).json({ auth_url })
-
 });
 
 router.get('/auth/callback', async (request, response) => {
@@ -31,7 +30,11 @@ router.get('/auth/callback', async (request, response) => {
     userAgent: 'Crowddit',
     redirectUri: 'https://indivism.github.io/crowddit/#/',
     clientId: 'r9CTq6ZW0UARpg'
-  }).then( r => { return r.getHot().then(posts => { posts })})
+  }).then( r => { 
+    return r.getHot().then(
+      posts => { posts }
+    ).catch(err => console.log(err))})
+  .catch(err => console.log(err))
   console.log(data)
   response.status(200).json(data)
 })
