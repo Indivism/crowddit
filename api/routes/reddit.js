@@ -56,7 +56,7 @@ router.get('/auth/callback', (request, response) => {
             try {
                 db.insertTokenInformation(crowddit, json.access_token, json.refresh_token)
             } catch(err) {
-                response.status(400).json(err)
+                response.status(400).json({ message: "Check that the Crowddit username satisfies the DB constraints such as foreign key, not null, etc. " })
             }
             response.status(200).json(json)
         })
