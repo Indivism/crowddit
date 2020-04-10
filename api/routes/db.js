@@ -214,10 +214,13 @@ const read = () => {
     const db = open()
     const statement_credentials = db.prepare(' SELECT * FROM Credentials')
     const Credentials = statement_credentials.get();
-    const statement_tokens = db.prepare(' SELECT * FROM Tokens')
+    const statement_tokens = db.prepare(' SELECT * FROM Tokens');
     const Tokens = statement_tokens.get();
+    const statement_subreddits = db.prepare('SELECT * FROM Subreddits');
+    const Subreddits = statement_subreddits.get();
+    console.log("raw results: ", Credentials, Tokens, Subreddits)
     close(db)
-    return { Credentials, Tokens }
+    return { Credentials, Tokens, Subreddits }
 }
 
 module.exports = {
