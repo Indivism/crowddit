@@ -32,11 +32,9 @@ router.get('/auth/callback', async (request, response) => {
     clientId: 'r9CTq6ZW0UARpg'
   }).then( r => { 
     return r.getHot().then(
-      posts => { posts }
-    ).catch(err => console.log(err))})
-  .catch(err => console.log(err))
-  console.log(data)
-  response.status(200).json(data)
+      posts => { response.status(200).json({posts}) }
+    ).catch(err => console.log("err in: ", err))})
+  .catch(err => console.log("err out: ", err))
 })
  
 router.get('/savedposts', (request, response, next) => {
