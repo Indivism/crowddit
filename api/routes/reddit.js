@@ -3,6 +3,7 @@ const snoowrap = require('snoowrap')
 const crypto = require('crypto');
 const router = express.Router();
 const open = require('open');
+const querystring = require('querystring');
 var state
 
 router.get('/auth', (request, response, next) => {
@@ -28,7 +29,7 @@ router.get('/auth/callback', async (request, response) => {
   const data = await snoowrap.fromAuthCode({
     code,
     userAgent: 'Crowddit',
-    redirectUri: 'https://indivism.github.io/crowddit',
+    redirectUri: 'https://crowddit-backend.herokuapp.com/reddit/auth/callback/',
     clientId: 'r9CTq6ZW0UARpg'
   }).then( r => { 
     return r.getHot().then(
@@ -36,6 +37,31 @@ router.get('/auth/callback', async (request, response) => {
     ).catch(err => console.log("err in: ", err))})
   .catch(err => console.log("err out: ", err))
 })
+
+// router.get('/auth/callback', (request, response) => {
+
+//   const { code } = request.query
+//   console.log(log)
+
+//   const params = {
+//     code,
+//     grant_type: 'authorization_code',
+//     redirect_uri: 'https://crowddit-backend.herokuapp.com/reddit/auth/callback/'
+//   }
+
+//   const options = {
+//     method: 'POST',
+//     headers: new Headers({
+//       "Authorization": `Basic ${base64.encode(`r9CTq6ZW0UARpg:hkKsFTiWhzC8mjooneV-bxRQSDA`)}`
+//     }),
+//     body: querystring.stringify(params)
+//   }
+
+//   if(code) {
+//     fetch('https://www.reddit.com/api/v1/access_token', options)
+
+//   }
+// })
  
 router.get('/savedposts', (request, response, next) => {
     sw.getMe().getSavedContent().then(post => {
