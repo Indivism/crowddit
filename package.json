@@ -14,6 +14,7 @@
   "author": "Jack Gronenthal",
   "license": "ISC",
   "dependencies": {
+    "@jimmycode/simple-oauth2-reddit": "^0.6.0",
     "better-sqlite3": "^6.0.1",
     "express": "^4.17.1",
     "http": "0.0.1-security",
@@ -23,6 +24,7 @@
     "react-router-dom": "^5.1.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "simple-oauth2": "^3.4.0",
     "snoowrap": "^1.21.0",
     "sqlite-async": "^1.0.12",
     "sqlite3": "^4.1.1",
