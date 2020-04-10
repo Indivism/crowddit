@@ -191,7 +191,7 @@ const insertTokenInformation = (crowddit, accessToken, refreshToken) => {
         ON CONFLICT(Crowddit)
         DO UPDATE SET AccessToken = ?, RefreshToken = ?
     `);
-    const data = statement.run(crowddit.toUpperCase(), accessToken, refreshToken);
+    const data = statement.run(crowddit.toUpperCase(), accessToken, refreshToken, accessToken, refreshToken);
     close(db);
     return data;
 };
