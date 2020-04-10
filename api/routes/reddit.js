@@ -45,8 +45,6 @@ router.get('/auth/callback', (request, response) => {
     body: querystring.stringify(params)
   }
 
-  console.log(options.headers)
-
   if(code) {
     fetch('https://www.reddit.com/api/v1/access_token', options)
     .then(res => res.json())
