@@ -177,7 +177,7 @@ const insertUser = (username, password) => {
 
 const getAssociations = crowddit => {
     const db = open();
-    const statement = db.prepare('SELECT Reddit FROM Tokens WHERE Crowddit = ?');
+    const statement = db.prepare('SELECT * FROM Tokens WHERE Crowddit = ?');
     const data = statement.get(crowddit)
     close(db);
     return data;
