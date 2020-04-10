@@ -11,33 +11,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import * as serviceWorker from './serviceWorker';
 import Routes from './routes'
-import thunk from 'redux-thunk'
+import { ConnectedRouter } from 'connected-react-router'
+import configureStore, { history } from './store'
 
-import { persistor, store } from './store'
-
-// const persistConfig = {
-//   key: 'root',
-//   storage
-// }
-
-// const persistedReducer = persistReducer(persistConfig, rootReducer)
-
-// const persist = () => {
-//   let store = createStore(persistedReducer, applyMiddleware(thunk, logger))
-//   let persistor = persistStore(store)
-//   return { store, persistor }
-// } 
-
-// const store = createStore(
-//   rootReducer,
-//   applyMiddleware(thunk, logger)
-// )
-
-// window.store = persist.store
+let store = configureStore()
 
 render(
   <Provider store={ store }>
-      <Routes />
+      <ConnectedRouter history={ history }>
+        <Routes />
+      </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 );
