@@ -161,6 +161,7 @@ const insertUser = (username, password) => {
     const statement = db.prepare('INSERT INTO Credentials(Username, Password) VALUES(?, ?)');
     const data = statement.run(username, password);
     close(db);
+    console.log(read())
     return data;
 }
 
