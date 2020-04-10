@@ -14,5 +14,7 @@ export let GET_ASSOCIATIONS = 'GET_ASSOCIATIONS'
 export let AUTH='AUTH'
 export let DISMISS_AUTH_ALERT='DISMISS_AUTH_ALERT'
 
+export let CHECK_CROWDDIT_AUTH_STATUS = 'CHECK_CROWDDIT_AUTH_STATUS'
+
 export let HEROKU_BACKEND = 'https://crowddit-backend.herokuapp.com'
 export let GH_PAGES = "https://indivism.github.io/crowddit"

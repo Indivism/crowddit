@@ -16,6 +16,7 @@ const NavigationBar = (props) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
+  console.log(props)
 
     return (
     <div>
@@ -32,9 +33,9 @@ const NavigationBar = (props) => {
             <NavItem>
               <NavLink href="https://github.com/Indivism/crowddit">GitHub</NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink onClick={() => { props.setPage("/settings") }}>Settings</NavLink>
-            </NavItem>
+            { props.cookie && <NavItem>
+              <NavLink onClick={() => { props.setPage("/settings") }} style={{cursor: "pointer"}}>Settings</NavLink>
+            </NavItem>}
           </Nav>
         </Collapse>
         

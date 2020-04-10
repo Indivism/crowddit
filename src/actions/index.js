@@ -163,3 +163,5 @@ export let auth = async crowddit => {
 }
 
 export let dismissAuthAlert = () => ({ type: C.DISMISS_AUTH_ALERT })
+
+export let checkCrowdditAuthStatus = () => ({ type: C.CHECK_CROWDDIT_AUTH_STATUS })
