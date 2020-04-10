@@ -131,6 +131,11 @@ router.get('/createUser', (request, response, next) => {
     response.status(200).cookie('crowddit', username + ';').json({ status: "success", message: "User account created.", username})
 })
 
+router.get('/read', async (request, response, next) => {
+    const crowddit_db = await read()
+    response.status(200).json(crowddit_db)
+})
+
 const open = () => { return new Database('./crowddit.db', { verbose: console.log })};
 
 const close = db => { db.close() };
@@ -160,7 +165,6 @@ const insertUser = (username, password) => {
 }
 
 const getAssociations = crowddit => {
-
     console.log(crowddit)
 
     const db = open();
@@ -203,6 +207,18 @@ const getTokenInformation = crowddit => {
     close(db);
     return data;
 };
+
+// Reads
+
+const read = () => {
+    const db = open()
+    const statement_credentials = db.prepare(' SELECT * FROM Credentials')
+    const Credentials = statement_credentials.get();
+    const statement_tokens = db.prepare(' SELECT * FROM Tokens')
+    const Tokens = statement_tokens.get();
+    close(db)
+    return { Credentials, Tokens }
+}
 
 module.exports = {
     router,
