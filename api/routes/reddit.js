@@ -8,10 +8,8 @@ const base64 = require('base-64');
 const querystring = require('querystring');
 const db = require('./db');
 
-var state, crowddit
-
 router.get('/auth', (request, response, next) => {
-    crowddit = request.query['crowddit']
+    var crowddit = request.query['crowddit']
 
     state = crypto.randomBytes(16).toString('base64')
 
@@ -20,7 +18,7 @@ router.get('/auth', (request, response, next) => {
         scope: ['identity', 'read', 'history', 'mysubreddits', 'save', 'subscribe'],
         redirectUri: 'https://crowddit-backend.herokuapp.com/reddit/auth/callback/',
         permanent: true,
-        state
+        state: crowddit
     })
 
     open(auth_url)  
@@ -29,7 +27,8 @@ router.get('/auth', (request, response, next) => {
 
 router.get('/auth/callback', (request, response) => {
 
-    const { code } = request.query
+    const { code, state } = request.query
+    var crowddit = state;
 
     const params = {
         code,
