@@ -53,7 +53,11 @@ router.get('/auth/callback', (request, response) => {
         .then(res => res.json())
         .then(async json => {
             console.log(crowddit, json.access_token, json.refresh_token)
-            await db.insertTokenInformation(crowddit, json.access_token, json.refresh_token)
+            try {
+                db.insertTokenInformation(crowddit, json.access_token, json.refresh_token)
+            } catch(err) {
+                response.status(400).json(err)
+            }
             response.status(200).json(json)
         })
         return
