@@ -204,9 +204,8 @@ const getTokenInformation = (crowddit) => {
     return data;
 };
 
-module.exports = router
-
-// module.exports = {
-//     insertTokenInformation, 
-//     getTokenInformation
-// };
+module.exports = {
+    router,
+    insertTokenInformation, 
+    getTokenInformation
+};

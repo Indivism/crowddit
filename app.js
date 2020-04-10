@@ -13,7 +13,7 @@ app.use(function(req, res, next) {
 const dbRoutes = require('./api/routes/db')
 const redditRoutes = require('./api/routes/reddit')
 
-app.use('/db', dbRoutes)
+app.use('/db', dbRoutes.router)
 app.use('/reddit', redditRoutes)
 
 
