@@ -89,6 +89,7 @@ export let cookie = () => ({
 
 export let logout = () => {
     document.cookie = 'crowddit' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    window.location = 'https://indivism.github.io/crowddit/#/'
     return { type: C.LOGOUT }
 }
 

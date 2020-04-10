@@ -17,7 +17,7 @@ export default props => {
                             <hr />
                             <p>Tokenized access ensures Crowddit will never ask for your password.</p>
                             <p className="lead">
-                                <Button color="primary" onClick={() => { props.auth(props.crowddit) }}>Join the Crowd</Button>
+                                <Button color="primary" onClick={() => { props.auth(props.crowddit) }}>Join the Crowdd</Button>
                             </p>
                         </Jumbotron>
                     </div>
