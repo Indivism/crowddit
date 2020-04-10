@@ -23,6 +23,9 @@ export default () => (
             <Route path="/settings">
                 <Settings />
             </Route>
+            <Route path="/about">
+                <img src="abdu.jpg"></img>
+            </Route>
         </Switch>
     </Router>
 )

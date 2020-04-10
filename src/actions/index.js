@@ -1,5 +1,7 @@
 import * as C from '../constants'
 import querystring from 'query-string'
+import { getStore } from '../index'
+import { push } from 'react-router-redux'
 
 
 export let toggleLogin = () => {
@@ -29,7 +31,6 @@ export let usernameBlur = async payload => {
 } 
 
 export let passwordBlur = async payload => {
-
     if(payload === "")
         return { type: C.DEFAULT }
 
@@ -74,7 +75,6 @@ export let createUser = async () => {
 
     console.log(response)
     if(response.status === 'success') {
-        console.log("setting cookie")
         document.cookie = 'crowddit=' + response.username
         return {type: C.CREATE_USER, payload: { status: true, username }}
     } else {
@@ -89,7 +89,8 @@ export let cookie = () => ({
 
 export let logout = () => {
     document.cookie = 'crowddit' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    window.location = 'https://indivism.github.io/crowddit/#/'
+    // getStore().dispatch(push('/crowddit'))
+    window.location.href = 'https://indivism.github.io/crowddit/#/'
     return { type: C.LOGOUT }
 }
 
@@ -166,3 +167,35 @@ export let auth = async crowddit => {
 export let dismissAuthAlert = () => ({ type: C.DISMISS_AUTH_ALERT })
 
 export let checkCrowdditAuthStatus = () => ({ type: C.CHECK_CROWDDIT_AUTH_STATUS })
+
+export let returnFromReddit = () => {
+    
+    let hash = getStore().getState().router.location.hash
+    let status = hash.substring(hash.indexOf("=" + 1))
+
+    switch(status) {
+        case "insert":
+            return { type: C.AUTH_SUCCESS, payload: status }
+        case "failure":
+            return { type: C.AUTH_FAIL, payload: status }
+        case "conflict":
+            return { type: C.AUTH_FAIL, payload: status }
+        default:
+            return { type: C.DEFAULT }
+    }
+}
+
+export let revokeAuth = async () => {
+
+    let url = C.HEROKU_BACKEND + '/revoke?' + querystring.stringify({ crowddit: getStore().getState().app.username })
+    
+    let options = {
+        method: 'GET'
+    }
+
+    await fetch(url, options)
+    .then(res => res.json())
+    .then(json => console.log(json))
+
+    return { type: C.REVOKE_AUTH }
+}

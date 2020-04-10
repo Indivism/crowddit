@@ -9,7 +9,8 @@ const INITIAL = {
     createUserAlert: false,
     page: "/",
     initAccountAlert: false,
-    showAuthAlert: true
+    showAuthAlert: true,
+    auth: false
 }
 
 export default (state = INITIAL, action) => {
@@ -48,7 +49,8 @@ export default (state = INITIAL, action) => {
             return {
                 ...state,
                 cookie: false,
-                initAccountAlert: false
+                initAccountAlert: false,
+                auth: false
             }
         }
         case C.LOGIN: {
@@ -57,7 +59,9 @@ export default (state = INITIAL, action) => {
                 showLoginModal: false,
                 username: action.payload.username,
                 cookie: true,
-                invalidLoginAttempt: false
+                invalidLoginAttempt: false,
+                initAccountAlert: false,
+                auth: true
             }
         }
         case C.GET_ASSOCIATIONS:
@@ -67,7 +71,8 @@ export default (state = INITIAL, action) => {
                 username: action.payload.username,
                 cookie: true,
                 invalidLoginAttempt: false,
-                initAccountAlert: true
+                initAccountAlert: true,
+                auth: false
             }
         case C.INVALID_LOGIN: {
             return {
@@ -98,6 +103,25 @@ export default (state = INITIAL, action) => {
                 ...state,
                 showAuthAlert: false
             }
+        case C.AUTH_SUCCESS: {
+            return {
+                ...state,
+                auth: true
+            }
+        }
+        case C.AUTH_FAIL: {
+            return {
+                ...state,
+                auth: false
+            }
+        }
+        case C.REVOKE_AUTH: {
+            return {
+                ...state,
+                auth: false
+            }
+        } 
+
 
         default:
             return state

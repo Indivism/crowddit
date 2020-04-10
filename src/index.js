@@ -15,6 +15,9 @@ import { ConnectedRouter } from 'connected-react-router'
 import configureStore, { history } from './store'
 
 let store = configureStore()
+window.store = store
+
+export let getStore = () => { return store }
 
 render(
   <Provider store={ store }>
