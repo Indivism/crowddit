@@ -183,6 +183,7 @@ export let returnFromReddit = () => {
         default:
             return { type: C.DEFAULT }
     }
+    
 }
 
 export let revokeAuth = async () => {
