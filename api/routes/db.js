@@ -132,6 +132,16 @@ router.get('/createUser', (request, response, next) => {
     response.status(200).cookie('crowddit', username + ';').json({ status: "success", message: "User account created.", username})
 })
 
+router.get('/revoke', (request, response, next) => {
+    try {
+        const { crowddit } = request.query
+        const data = revoke(crowddit)
+        response.status(200).json(data)
+    } catch(err) {
+        response.status(400).json(err)
+    }  
+})
+
 router.get('/', async (request, response, next) => {
     const crowddit_db = await read()
     response.status(200).json(crowddit_db)
@@ -184,7 +194,7 @@ const setAssociation = (crowddit, reddit) => {
         DO UPDATE SET Reddit = ?
     `);
     const random = Math.random().toString(36).substring(2, 15)
-    const data = statement.run(crowddit, random, random)
+    const data = statement.run(crowddit.toUpperCase(), random, random)
     close(db);
     return data;
 }
@@ -216,13 +226,34 @@ const read = () => {
     const db = open()
     const statement_credentials = db.prepare(' SELECT * FROM Credentials')
     const Credentials = statement_credentials.all();
+    const statement_usernames = db.prepare(' SELECT * FROM Usernames')
+    const Usernames = statement_usernames.all();
     const statement_tokens = db.prepare(' SELECT * FROM Tokens');
     const Tokens = statement_tokens.all();
     const statement_subreddits = db.prepare('SELECT * FROM Subreddits');
     const Subreddits = statement_subreddits.all();
-    console.log("raw results: ", Credentials, Tokens, Subreddits)
+    console.log("raw results: ", Credentials, Usernames, Tokens, Subreddits)
     close(db)
-    return { Credentials, Tokens, Subreddits }
+    return { Credentials, Usernames, Tokens, Subreddits }
+}
+
+const revoke = crowddit => {
+    const db = open()
+
+    const statement_usernames = db.prepare(`
+        DELETE FROM Usernames
+        WHERE Crowddit = ?
+    `)
+    const data_usernames = statement_usernames.run(crowddit.toUpperCase())
+
+    const statement_tokens = db.prepare(`
+        DELETE FROM Tokens
+        WHERE Crowddit = ?
+    `)
+    const data_tokens = statement_tokens.run(crowddit.toUpperCase())
+
+    close(db)
+    return { data_usernames, data_tokens }
 }
 
 module.exports = {
