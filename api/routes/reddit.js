@@ -2,26 +2,28 @@ const express = require('express');
 const snoowrap = require('snoowrap')
 const crypto = require('crypto');
 const router = express.Router();
-const auth = require('@jimmycode/simple-oauth2-reddit');
+const open = require('open');
+var state
 
-const reddit = auth.create({
-  clientId: 'r9CTq6ZW0UARpg',
-  clientSecret: 'hkKsFTiWhzC8mjooneV-bxRQSDA',
-  callbackURL: 'http://localhost:3001/reddit/auth/callback',
-  state: crypto.randomBytes(16).toString('base64')
-})
+router.get('/auth', (request, response, next) => {
 
-// const sw = new snoowrap({
-//     userAgent: 'crowddit',
-//     clientId: 'DBZ2ZJ37Bs431A',
-//     clientSecret: 'J_-QRQAYKNPe24Je-QiiAxk7QYM',
-//     refreshToken: '481153194914-AAkuEVOU_MLIpmbJYyiiDszIdus',
-// })
+  state = crypto.randomBytes(16).toString('base64')
 
-router.get('/auth', reddit.authorize);
+  var auth_url = snoowrap.getAuthUrl({
+    clientId: 'r9CTq6ZW0UARpg',
+    scope: ['identity'],
+    redirectUri: 'https://crowddit-backend.herokuapp.com/reddit/auth/callback/',
+    permanent: true,
+    state
+  })
 
-router.get('/auth/callback', reddit.accessToken, (request, response) => {
-  return response.status(200).json(requset.token)
+  open(auth_url)  
+  response.status(200).json({ auth_url })
+
+});
+
+router.get('/auth/callback', (request, response) => {
+  console.log()
 })
  
 router.get('/savedposts', (request, response, next) => {
