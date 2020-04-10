@@ -6,10 +6,12 @@ const open = require('open');
 const fetch = require('node-fetch')
 const base64 = require('base-64');
 const querystring = require('querystring');
-var state
+const db = require('./db');
+
+var state, crowddit
 
 router.get('/auth', (request, response, next) => {
-
+  crowddit = request.query.crowddit
   state = crypto.randomBytes(16).toString('base64')
 
   var auth_url = snoowrap.getAuthUrl({
@@ -45,10 +47,15 @@ router.get('/auth/callback', (request, response) => {
     body: querystring.stringify(params)
   }
 
+  console.log(code)
   if(code) {
     fetch('https://www.reddit.com/api/v1/access_token', options)
     .then(res => res.json())
-    .then(json => response.status(200).json(json))
+    .then(async json => {
+        console.log("TEST")
+        await db.insertTokenInformation(crowddit, json.access_token, json.refresh_token)
+        response.status(200).json(json)
+    })
     return
   }
   response.status(400).json({message: "failure"})
@@ -66,14 +73,19 @@ router.get('/savedposts', (request, response, next) => {
 
 // reference end point
 router.get('/test', (request, response, next) => {
-  const r = new snoowrap({
-    userAgent: 'test agent', // doesn't matter
-    clientId: 'r9CTq6ZW0UARpg', // stay constant
-    clientSecret: 'hkKsFTiWhzC8mjooneV-bxRQSDA', // should be in env var
-    refreshToken: '22316473-r6PzX6QQrUnyn1VF_4jXNpF7fw4' // will change
-  })
+    const { RefreshToken, AccessToken } = db.getTokenInformation(crowddit);
 
-  r.getHot().map(post => post.title).then(console.log);
+    console.log(RefreshToken);
+    console.log(AccessToken);
+
+    const r = new snoowrap({
+        userAgent: 'crowddit', // doesn't matter
+        clientId: 'r9CTq6ZW0UARpg', // stay constant
+        clientSecret: 'hkKsFTiWhzC8mjooneV-bxRQSDA', // should be in env var
+        refreshToken: RefreshToken // will change
+    })
+
+//   r.getHot().map(post => post.title).then(console.log);
   console.log("subscriptions: ", r.getSubscriptions({limit: 2}).then(subscriptions => {
     response.status(200).json(subscriptions)
   }))
