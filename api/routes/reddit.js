@@ -11,7 +11,7 @@ router.get('/auth', (request, response, next) => {
 
   var auth_url = snoowrap.getAuthUrl({
     clientId: 'r9CTq6ZW0UARpg',
-    scope: ['identity'],
+    scope: ['identity', 'read'],
     redirectUri: 'https://crowddit-backend.herokuapp.com/reddit/auth/callback/',
     permanent: true,
     state
@@ -23,8 +23,17 @@ router.get('/auth', (request, response, next) => {
 });
 
 router.get('/auth/callback', (request, response) => {
-  console.log(request)
-  response.status(200).json( request )
+
+  const { code } = request.query
+
+  snoowrap.fromAuthCode({
+    code,
+    userAgent: 'Crowddit',
+    redirectUri: 'https://indivism.github.io/crowddit/#/',
+    clientId: 'r9CTq6ZW0UARpg'
+  }).then( r => { r.getHot().then(posts => {
+    response.status(200).json({posts})
+  })})
 })
  
 router.get('/savedposts', (request, response, next) => {
