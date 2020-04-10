@@ -52,6 +52,7 @@ router.get('/auth/callback', (request, response) => {
     fetch('https://www.reddit.com/api/v1/access_token', options)
     .then(res => res.json())
     .then(async json => {
+        console.log(crowddit, json.access_token, json.refresh_token)
         await db.insertTokenInformation(crowddit, json.access_token, json.refresh_token)
         response.status(200).json(json)
     })
