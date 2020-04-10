@@ -8,13 +8,16 @@ const base64 = require('base-64');
 const querystring = require('querystring');
 const db = require('./db');
 
+const clientId = 'r9CTq6ZW0UARpg'
+const clientSecret = 'hkKsFTiWhzC8mjooneV-bxRQSDA'
+
 router.get('/auth', (request, response, next) => {
     var crowddit = request.query['crowddit']
 
     state = crypto.randomBytes(16).toString('base64')
 
     var auth_url = snoowrap.getAuthUrl({
-        clientId: 'r9CTq6ZW0UARpg',
+        clientId,
         scope: ['identity', 'read', 'history', 'mysubreddits', 'save', 'subscribe'],
         redirectUri: 'https://crowddit-backend.herokuapp.com/reddit/auth/callback/',
         permanent: true,
@@ -90,13 +93,12 @@ router.get('/auth/callback', (request, response) => {
 router.get('/test', (request, response, next) => {
 
     var crowddit = request.query['crowddit']
-    console.log(crowddit);
     const { RefreshToken, AccessToken } = db.getTokenInformation(crowddit);
 
     const r = new snoowrap({
+        clientId, // stay constant
+        clientSecret,
         userAgent: 'crowddit', // doesn't matter
-        clientId: 'r9CTq6ZW0UARpg', // stay constant
-        clientSecret: 'hkKsFTiWhzC8mjooneV-bxRQSDA', // should be in env var
         refreshToken: RefreshToken // will change
     })
 
@@ -104,6 +106,38 @@ router.get('/test', (request, response, next) => {
     console.log("subscriptions: ", r.getSubscriptions({limit: 2}).then(subscriptions => {
         response.status(200).json(subscriptions)
     }))
+})
+
+router.get('/revoke', async (request, response, next) => {
+    const crowddit = request.query['crowddit']
+    try {
+        var { RefreshToken }  = db.getTokenInformation(crowddit)
+    } catch {
+        response.status(400).json({ message: "Crowddit username not in db.", crowddit })
+        return
+    }
+
+    console.log(RefreshToken)
+
+    const url = 'https://www.reddit.com/api/v1/revoke_token'
+
+    const params = {
+        token: RefreshToken,
+        token_hint_type: 'refresh_token'
+    }
+
+    const headers = new fetch.Headers()
+    headers.set('Authorization', "Basic " + base64.encode(clientId + ":" + clientSecret))
+    headers.set('Content-Type', 'application/x-www-form-urlencoded')
+    
+    const options = {
+        method: 'POST',
+        headers,
+        body: querystring.stringify(params)
+    }
+
+    await fetch(url, options)
+    response.status(200).json({message: "Revoke attempted"})
 })
 
 module.exports = router;

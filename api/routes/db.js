@@ -196,7 +196,7 @@ const insertTokenInformation = (crowddit, accessToken, refreshToken) => {
     return data;
 };
 
-const getTokenInformation = (crowddit) => {
+const getTokenInformation = crowddit => {
     const db = open()
     const statement = db.prepare('SELECT AccessToken, RefreshToken FROM Tokens WHERE Crowddit = ?');
     const data = statement.get(crowddit.toUpperCase());
