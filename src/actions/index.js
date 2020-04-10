@@ -73,7 +73,7 @@ export let createUser = async () => {
         .catch(err => console.log(err))
 
     console.log(response)
-    if(response.status == 'success') {
+    if(response.status === 'success') {
         console.log("setting cookie")
         document.cookie = 'crowddit=' + response.username
         return {type: C.CREATE_USER, payload: { status: true, username }}
@@ -106,8 +106,21 @@ export let login = async ({ username, password }) => {
     
     console.log("response", response)
 
-    if(response.status == "success") {
-        return { type: C.LOGIN, payload: { username: response.username } }
+    
+
+    if(response.status === "success") {
+
+        let url_associations = C.HEROKU_BACKEND + '/db/getAssociations?' + querystring.stringify({ crowddit: response.username })
+        let data = await fetch(url_associations, options)
+            .then(res => res.json())
+            .then(json => json)
+        
+        console.log(data.data)
+        if(data.data) {
+            return { type: C.LOGIN, payload: { username: response.username } }
+        } else {
+            return { type: C.GET_ASSOCIATIONS, payload: { username: response.username } }
+        }
     } else {
         return { type: C.INVALID_LOGIN }
     }

@@ -7,7 +7,8 @@ const INITIAL = {
     username: document.cookie.slice(document.cookie.indexOf('crowddit') + 9),
     invalidLoginAttempt: false,
     createUserAlert: false,
-    page: "/"
+    page: "/",
+    initAccountAlert: false
 }
 
 export default (state = INITIAL, action) => {
@@ -44,7 +45,8 @@ export default (state = INITIAL, action) => {
         case C.LOGOUT: {
             return {
                 ...state,
-                cookie: false
+                cookie: false,
+                initAccountAlert: false
             }
         }
         case C.LOGIN: {
@@ -56,6 +58,15 @@ export default (state = INITIAL, action) => {
                 invalidLoginAttempt: false
             }
         }
+        case C.GET_ASSOCIATIONS:
+            return {
+                ...state,
+                showLoginModal: false,
+                username: action.payload.username,
+                cookie: true,
+                invalidLoginAttempt: false,
+                initAccountAlert: true
+            }
         case C.INVALID_LOGIN: {
             return {
                 ...state,

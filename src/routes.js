@@ -6,7 +6,9 @@ import {
     HashRouter as Router,
     Link
   } from "react-router-dom"
+
 import App from './App'
+import Settings from './components/containers/settings'
 import CreateAccount from './components/containers/createAccount'
 
 export default () => (
@@ -17,6 +19,9 @@ export default () => (
             </Route>
             <Route path="/createUser">
                 <CreateAccount />
+            </Route>
+            <Route path="/settings">
+                <Settings />
             </Route>
         </Switch>
     </Router>
