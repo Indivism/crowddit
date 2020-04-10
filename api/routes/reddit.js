@@ -73,6 +73,8 @@ router.get('/auth/callback', (request, response) => {
 
 // reference end point
 router.get('/test', (request, response, next) => {
+    var crowddit = request.query['crowddit']
+    console.log(crowddit);
     const { RefreshToken, AccessToken } = db.getTokenInformation(crowddit);
 
     console.log(RefreshToken);
