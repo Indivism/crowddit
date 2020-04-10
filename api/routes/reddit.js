@@ -14,7 +14,7 @@ router.get('/auth', (request, response, next) => {
 
   var auth_url = snoowrap.getAuthUrl({
     clientId: 'r9CTq6ZW0UARpg',
-    scope: ['identity', 'read', 'history', 'mysubreddits'],
+    scope: ['identity', 'read', 'history', 'mysubreddits', 'save', 'subscribe'],
     redirectUri: 'https://crowddit-backend.herokuapp.com/reddit/auth/callback/',
     permanent: true,
     state
@@ -64,11 +64,21 @@ router.get('/savedposts', (request, response, next) => {
             post
         });
     });
-
 })
 
+// reference end point
+router.get('/test', (request, response, next) => {
+  const r = new snoowrap({
+    userAgent: 'test agent', // doesn't matter
+    clientId: 'r9CTq6ZW0UARpg', // stay constant
+    clientSecret: 'hkKsFTiWhzC8mjooneV-bxRQSDA', // should be in env var
+    refreshToken: '22316473-r6PzX6QQrUnyn1VF_4jXNpF7fw4' // will change
+  })
 
-
-
+  r.getHot().map(post => post.title).then(console.log);
+  console.log("subscriptions: ", r.getSubscriptions({limit: 2}).then(subscriptions => {
+    response.status(200).json(subscriptions)
+  }))
+})
 
 module.exports = router;
