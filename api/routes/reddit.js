@@ -23,7 +23,7 @@ router.get('/auth', (request, response, next) => {
 });
 
 router.get('/auth/callback', (request, response) => {
-  console.log(request, request.json())
+  console.log(request)
 })
  
 router.get('/savedposts', (request, response, next) => {
