@@ -171,7 +171,7 @@ export let checkCrowdditAuthStatus = () => ({ type: C.CHECK_CROWDDIT_AUTH_STATUS
 export let returnFromReddit = () => {
     
     let hash = getStore().getState().router.location.hash
-    let status = hash.substring(hash.indexOf("=" + 1))
+    let status = hash.substring(hash.indexOf("=") + 1)
 
     switch(status) {
         case "insert":
