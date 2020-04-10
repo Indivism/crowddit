@@ -57,20 +57,22 @@ router.get('/auth/callback', (request, response) => {
             } catch(err) {
                 response
                 .status(301)
-                .redirect('https://indivism.github.io/crowddit/#/settings')
+                .redirect('https://indivism.github.io/crowddit/#/settings?error=conflict')
                 .json({ message: "Check that the Crowddit username satisfies the DB constraints such as foreign key, not null, etc. " })
             }
             response
             .status(301)
-            .redirect('https://indivism.github.io/crowddit/#/settings')
+            .redirect('https://indivism.github.io/crowddit/#/settings?success=insert')
             .json(json)
         })
         return
     }
     response
     .status(200)
-    .redirect('https://indivism.github.io/crowddit/#/settings')
+    .redirect('https://indivism.github.io/crowddit/#/settings?error=fail')
     .json({message: "failure"})
+
+    next().body = { message: "failure" }
     
     })
     
