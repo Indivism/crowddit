@@ -11,8 +11,8 @@ const db = require('./db');
 var state, crowddit
 
 router.get('/auth', (request, response, next) => {
-    console.log(request.query, request.query['crowddit'])
-    crowddit = request.query.crowddit
+    crowddit = request.query['crowddit']
+
     state = crypto.randomBytes(16).toString('base64')
 
     var auth_url = snoowrap.getAuthUrl({
