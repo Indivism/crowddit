@@ -3,6 +3,7 @@ const fetch = require('node-fetch');
 // const querystring = require('querystring');
 const router = express.Router();
 const Database = require('better-sqlite3');
+const crypto = require('crypto')
 
 // Error Codes
 // 0 -> Invalid Username
@@ -84,9 +85,9 @@ router.get('/getAssociations', (request, response, next) => {
 })
 
 router.get('/setAssociation', (request, response, next) => {
-    const { crowddit, reddit } = request.query
+    const { crowddit } = request.query
 
-    const data = setAssociation(crowddit.toUpperCase(), reddit.trim())
+    const data = setAssociation(crowddit.toUpperCase())
 
     response.status(200).json({ data })
 })
@@ -161,7 +162,6 @@ const insertUser = (username, password) => {
     const statement = db.prepare('INSERT INTO Credentials(Username, Password) VALUES(?, ?)');
     const data = statement.run(username, password);
     close(db);
-    console.log(read())
     return data;
 }
 
@@ -183,7 +183,8 @@ const setAssociation = (crowddit, reddit) => {
         ON CONFLICT(Crowddit)
         DO UPDATE SET Reddit = ?
     `);
-    const data = statement.run(crowddit, reddit, reddit)
+    const random = Math.random().toString(36).substring(2, 15)
+    const data = statement.run(crowddit, random, random)
     close(db);
     return data;
 }
