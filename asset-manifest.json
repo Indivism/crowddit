@@ -1,26 +1,26 @@
 {
   "files": {
     "main.css": "/crowddit/static/css/main.df1bad64.chunk.css",
-    "main.js": "/crowddit/static/js/main.048d6d1c.chunk.js",
-    "main.js.map": "/crowddit/static/js/main.048d6d1c.chunk.js.map",
+    "main.js": "/crowddit/static/js/main.bff7956e.chunk.js",
+    "main.js.map": "/crowddit/static/js/main.bff7956e.chunk.js.map",
     "runtime-main.js": "/crowddit/static/js/runtime-main.745c987f.js",
     "runtime-main.js.map": "/crowddit/static/js/runtime-main.745c987f.js.map",
     "static/css/2.de424728.chunk.css": "/crowddit/static/css/2.de424728.chunk.css",
-    "static/js/2.7f1ac8d2.chunk.js": "/crowddit/static/js/2.7f1ac8d2.chunk.js",
-    "static/js/2.7f1ac8d2.chunk.js.map": "/crowddit/static/js/2.7f1ac8d2.chunk.js.map",
+    "static/js/2.a09f08db.chunk.js": "/crowddit/static/js/2.a09f08db.chunk.js",
+    "static/js/2.a09f08db.chunk.js.map": "/crowddit/static/js/2.a09f08db.chunk.js.map",
     "index.html": "/crowddit/index.html",
-    "precache-manifest.799f2eb168c549ef35f506d9190c4561.js": "/crowddit/precache-manifest.799f2eb168c549ef35f506d9190c4561.js",
+    "precache-manifest.79d117ff24034b0ca796cf6d62577647.js": "/crowddit/precache-manifest.79d117ff24034b0ca796cf6d62577647.js",
     "service-worker.js": "/crowddit/service-worker.js",
     "static/css/2.de424728.chunk.css.map": "/crowddit/static/css/2.de424728.chunk.css.map",
     "static/css/main.df1bad64.chunk.css.map": "/crowddit/static/css/main.df1bad64.chunk.css.map",
-    "static/js/2.7f1ac8d2.chunk.js.LICENSE.txt": "/crowddit/static/js/2.7f1ac8d2.chunk.js.LICENSE.txt",
+    "static/js/2.a09f08db.chunk.js.LICENSE.txt": "/crowddit/static/js/2.a09f08db.chunk.js.LICENSE.txt",
     "static/media/logo.svg": "/crowddit/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.745c987f.js",
     "static/css/2.de424728.chunk.css",
-    "static/js/2.7f1ac8d2.chunk.js",
+    "static/js/2.a09f08db.chunk.js",
     "static/css/main.df1bad64.chunk.css",
-    "static/js/main.048d6d1c.chunk.js"
+    "static/js/main.bff7956e.chunk.js"
   ]
 }
