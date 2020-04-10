@@ -47,7 +47,6 @@ router.get('/auth/callback', (request, response) => {
         body: querystring.stringify(params)
     }
 
-    console.log(code)
     if(code) {
         fetch('https://www.reddit.com/api/v1/access_token', options)
         .then(res => res.json())
@@ -56,13 +55,23 @@ router.get('/auth/callback', (request, response) => {
             try {
                 db.insertTokenInformation(crowddit, json.access_token, json.refresh_token)
             } catch(err) {
-                response.status(400).json({ message: "Check that the Crowddit username satisfies the DB constraints such as foreign key, not null, etc. " })
+                response
+                .status(301)
+                .redirect('https://indivism.github.io/crowddit/#/settings')
+                .json({ message: "Check that the Crowddit username satisfies the DB constraints such as foreign key, not null, etc. " })
             }
-            response.status(200).json(json)
+            response
+            .status(301)
+            .redirect('https://indivism.github.io/crowddit/#/settings')
+            .json(json)
         })
         return
     }
-    response.status(400).json({message: "failure"})
+    response
+    .status(200)
+    .redirect('https://indivism.github.io/crowddit/#/settings')
+    .json({message: "failure"})
+    
     })
     
     router.get('/savedposts', (request, response, next) => {
@@ -77,12 +86,10 @@ router.get('/auth/callback', (request, response) => {
 
 // reference end point
 router.get('/test', (request, response, next) => {
+
     var crowddit = request.query['crowddit']
     console.log(crowddit);
     const { RefreshToken, AccessToken } = db.getTokenInformation(crowddit);
-
-    console.log(RefreshToken);
-    console.log(AccessToken);
 
     const r = new snoowrap({
         userAgent: 'crowddit', // doesn't matter
