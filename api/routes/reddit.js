@@ -3,6 +3,7 @@ const snoowrap = require('snoowrap')
 const crypto = require('crypto');
 const router = express.Router();
 const querystring = require('querystring');
+const open = require('open');
 
 const sw = new snoowrap({
     userAgent: 'crowddit',
@@ -20,40 +21,6 @@ router.get('/savedposts', (request, response, next) => {
         });
     });
 
-})
-
-router.get('/subreddits', (request, response, next) => {
-    // sw.getSubscriptions().then(subreddits => {
-    //     response.status(200).json({
-    //         status: "success",
-    //         message: "Subscribed subreddits retrieved.",
-    //         subreddits
-    //     });
-    // });
-
-    sw.getSubscriptions().then(console.log);
-
-})
-
-router.get('/auth', (request, response, next) => {
-    const state = crypto.randomBytes(16).toString('base64');
-
-    const params = {
-        client_id: 'DBZ2ZJ37Bs431A',
-        response_type: 'code',
-        state,
-        redirect_uri: 'https://indivism.github.io/crowddit',
-        permanent: true,
-        scope: 'history identity mysubreddits read save subscribe'
-    }
-
-    urlString = 'https://www.reddit.com/api/v1/authorize?' + querystring.stringify(params);
-
-    response.status(200).json({
-        status: "success",
-        message: "URL generated.",
-        urlString
-    });
 })
 
 module.exports = router;
