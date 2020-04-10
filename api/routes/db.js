@@ -213,11 +213,11 @@ const getTokenInformation = crowddit => {
 const read = () => {
     const db = open()
     const statement_credentials = db.prepare(' SELECT * FROM Credentials')
-    const Credentials = statement_credentials.get();
+    const Credentials = statement_credentials.all();
     const statement_tokens = db.prepare(' SELECT * FROM Tokens');
-    const Tokens = statement_tokens.get();
+    const Tokens = statement_tokens.all();
     const statement_subreddits = db.prepare('SELECT * FROM Subreddits');
-    const Subreddits = statement_subreddits.get();
+    const Subreddits = statement_subreddits.all();
     console.log("raw results: ", Credentials, Tokens, Subreddits)
     close(db)
     return { Credentials, Tokens, Subreddits }
