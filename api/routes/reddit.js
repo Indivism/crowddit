@@ -28,11 +28,11 @@ router.get('/auth/callback', async (request, response) => {
   const data = await snoowrap.fromAuthCode({
     code,
     userAgent: 'Crowddit',
-    redirectUri: 'https://indivism.github.io/crowddit/#/',
+    redirectUri: 'https://indivism.github.io/crowddit',
     clientId: 'r9CTq6ZW0UARpg'
   }).then( r => { 
     return r.getHot().then(
-      posts => { response.status(200).json({posts}) }
+      posts => { console.log("posts", posts) }
     ).catch(err => console.log("err in: ", err))})
   .catch(err => console.log("err out: ", err))
 })
