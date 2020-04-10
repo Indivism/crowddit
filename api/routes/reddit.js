@@ -25,14 +25,14 @@ router.get('/auth', (request, response, next) => {
 router.get('/auth/callback', (request, response) => {
 
   const { code } = request.query
-
+  console.log("code", code)
   snoowrap.fromAuthCode({
     code,
     userAgent: 'Crowddit',
     redirectUri: 'https://indivism.github.io/crowddit/#/',
     clientId: 'r9CTq6ZW0UARpg'
   }).then( r => { r.getHot().then(posts => {
-    response.status(200).json({posts})
+    return response.status(200).json({posts})
   })})
 })
  
