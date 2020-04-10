@@ -131,7 +131,7 @@ router.get('/createUser', (request, response, next) => {
     response.status(200).cookie('crowddit', username + ';').json({ status: "success", message: "User account created.", username})
 })
 
-router.get('/read', async (request, response, next) => {
+router.get('/', async (request, response, next) => {
     const crowddit_db = await read()
     response.status(200).json(crowddit_db)
 })
