@@ -140,3 +140,26 @@ export let toggleCreateAccountAlert = () => {
 }
 
 export let setPage = page => ({ type: C.SET_PAGE, payload: page })
+
+export let auth = async crowddit => {
+
+    let options = {
+        method: 'GET'
+    }
+
+    let url = C.HEROKU_BACKEND + '/reddit/auth?' + querystring.stringify({ crowddit })
+
+    fetch(url, options)
+        .then(res => res.json())
+        .then(json => {
+            if(json.auth_url) {
+                window.location = json.auth_url
+            }
+        })
+
+    return {
+        type: C.AUTH
+    }
+}
+
+export let dismissAuthAlert = () => ({ type: C.DISMISS_AUTH_ALERT })

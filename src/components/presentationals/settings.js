@@ -1,12 +1,13 @@
 import React from 'react'
 import NavigationBar from '../containers/navbar'
-import { Nav, NavItem, NavLink, Jumbotron, Button } from 'reactstrap';
+import { Nav, NavItem, NavLink, Jumbotron, Button, Form } from 'reactstrap';
+import AuthAlert from '../containers/AuthAlert'
 
-
-export default () => {
+export default props => {
     return (
         <div>
             <NavigationBar />
+            <AuthAlert />
             <div className = "container-fluid" style={{padding: '3rem'}}>
                 <div className="row justify-content-center">
                     <div className="col-6 justify-contents-center">
@@ -16,9 +17,8 @@ export default () => {
                             <hr />
                             <p>Tokenized access ensures Crowddit will never ask for your password.</p>
                             <p className="lead">
-                                <Button href="https://indivism.github.io/crowddit/#/reddit/auth" color="primary">Join the Crowd</Button>
+                                <Button color="primary" onClick={() => { props.auth(props.crowddit) }}>Join the Crowd</Button>
                             </p>
-
                         </Jumbotron>
                     </div>
                 </div>

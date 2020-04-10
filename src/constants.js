@@ -11,6 +11,8 @@ export let CREATE_USER_ALERT = 'CREATE_USER_ALERT'
 export let DEFAULT = 'DEFAULT'
 export let SET_PAGE = 'SET_PAGE'
 export let GET_ASSOCIATIONS = 'GET_ASSOCIATIONS'
+export let AUTH='AUTH'
+export let DISMISS_AUTH_ALERT='DISMISS_AUTH_ALERT'
 
 export let HEROKU_BACKEND = 'https://crowddit-backend.herokuapp.com'
 export let GH_PAGES = "https://indivism.github.io/crowddit"

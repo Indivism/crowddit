@@ -8,7 +8,8 @@ const INITIAL = {
     invalidLoginAttempt: false,
     createUserAlert: false,
     page: "/",
-    initAccountAlert: false
+    initAccountAlert: false,
+    showAuthAlert: true
 }
 
 export default (state = INITIAL, action) => {
@@ -40,7 +41,8 @@ export default (state = INITIAL, action) => {
             return {
                 ...state,
                 username: action.payload.username,
-                showLoginModal: false
+                showLoginModal: false,
+                initAccountAlert: true
             }
         case C.LOGOUT: {
             return {
@@ -91,6 +93,11 @@ export default (state = INITIAL, action) => {
                 page: action.payload
             }
         }
+        case C.DISMISS_AUTH_ALERT: 
+            return {
+                ...state,
+                showAuthAlert: false
+            }
 
         default:
             return state
