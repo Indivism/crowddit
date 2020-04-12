@@ -216,10 +216,14 @@ const insertTokenInformation = (crowddit, accessToken, refreshToken) => {
     `);
     const data = statement.run(
         crowddit.toUpperCase(), 
-        encrypt(accessToken), 
-        encrypt(refreshToken), 
-        encrypt(accessToken), 
-        encrypt(refreshToken)
+        // encrypt(accessToken), 
+        // encrypt(refreshToken), 
+        // encrypt(accessToken), 
+        // encrypt(refreshToken)
+        accessToken,
+        refreshToken,
+        accessToken,
+        refreshToken
     );
     close(db);
     return data;
