@@ -80,8 +80,8 @@ router.get('/checkPassword', (request, response, next) => {
 
 router.get('/getAssociations', (request, response, next) => {
     const { crowddit } = request.query
-
-    const data = getAssociations(crowddit.toUpperCase())
+    console.log("Get Association -> ", crowddit)
+    const data = getAssociations(crowddit)
     console.log("Get Assocations: ", data)
     if(data && Object.keys(data).includes('Crowddit')) {
         response.status(200).json({ message: "Reddit authenticated.", status: "success" })
@@ -228,10 +228,6 @@ const insertTokenInformation = (crowddit, accessToken, refreshToken) => {
         encrypt(refreshToken), 
         encrypt(accessToken), 
         encrypt(refreshToken)
-        // accessToken,
-        // refreshToken,
-        // accessToken,
-        // refreshToken
     );
     close(db);
     return data;

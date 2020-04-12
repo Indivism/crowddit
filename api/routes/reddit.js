@@ -49,7 +49,7 @@ router.get('/auth/callback', (request, response, next) => {
         headers,
         body: querystring.stringify(params)
     }
-
+    console.log("auth/callback", crowddit, code)
     if(code) {
         fetch('https://www.reddit.com/api/v1/access_token', options)
         .then(res => res.json())
@@ -76,9 +76,6 @@ router.get('/auth/callback', (request, response, next) => {
     .status(200)
     .redirect('https://indivism.github.io/crowddit/#/settings?error=fail')
     .json({message: "failure"})
-
-    next().body = { message: "failure" }
-    
     })
     
     router.get('/savedposts', (request, response, next) => {
