@@ -28,7 +28,7 @@ router.get('/auth', (request, response, next) => {
     response.status(200).json({ auth_url })
 });
 
-router.get('/auth/callback', (request, response) => {
+router.get('/auth/callback', (request, response, next) => {
 
     const { code, state } = request.query
     var crowddit = state;
@@ -65,7 +65,7 @@ router.get('/auth/callback', (request, response) => {
                 response
                 .status(301)
                 .redirect('https://indivism.github.io/crowddit/#/settings?error=conflict')
-                .json({ message: "Check that the Crowddit username satisfies the DB constraints such as foreign key, not null, etc. " })
+                return
             }
             response
             .status(301)

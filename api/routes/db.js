@@ -234,7 +234,6 @@ const getTokenInformation = crowddit => {
 };
 
 // Reads
-
 const read = () => {
     const db = open()
     const statement_credentials = db.prepare(' SELECT * FROM Credentials')
