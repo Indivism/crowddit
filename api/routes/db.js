@@ -4,6 +4,8 @@ const fetch = require('node-fetch');
 const router = express.Router();
 const Database = require('better-sqlite3');
 const crypto = require('crypto')
+const key = crypto.randomBytes(32) 
+const iv = crypto.randomBytes(16)
 
 // Error Codes
 // 0 -> Invalid Username
@@ -147,6 +149,12 @@ router.get('/', async (request, response, next) => {
     response.status(200).json(crowddit_db)
 })
 
+router.get('/test', (request, response, next) => {
+    const encrypted = encrypt(String(request.query.message))
+    console.log(encrypted)
+    console.log(decrypt(encrypted))
+})
+
 const open = () => { return new Database('./crowddit.db', { verbose: console.log })};
 
 const close = db => { db.close() };
@@ -254,8 +262,27 @@ const revoke = crowddit => {
     return { data_usernames, data_tokens }
 }
 
+let encrypt = text => {
+    let cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(key), iv);
+    let encrypted = cipher.update(text);
+    encrypted = Buffer.concat([encrypted, cipher.final()]);
+    return { iv: iv.toString('hex'), encryptedData: encrypted.toString('hex') };
+}
+   
+let decrypt = text => {
+    let iv = Buffer.from(text.iv, 'hex');
+    let encryptedText = Buffer.from(text.encryptedData, 'hex');
+    let decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
+    let decrypted = decipher.update(encryptedText);
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+    return decrypted.toString();
+}
+
 module.exports = {
     router,
     insertTokenInformation, 
-    getTokenInformation
+    getTokenInformation,
+    encrypt,
+    decrypt
 };
+
