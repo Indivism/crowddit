@@ -82,7 +82,7 @@ router.get('/getAssociations', (request, response, next) => {
     const { crowddit } = request.query
 
     const data = getAssociations(crowddit.toUpperCase())
-
+    console.log("Get Assocations: ", data)
     if(Object.keys(data).includes('Crowddit')) {
         response.status(200).json({ message: "Reddit authenticated.", status: "success" })
     } else {
