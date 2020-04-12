@@ -1,31 +1,41 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import { routerMiddleware } from 'connected-react-router'
+import { routerMiddleware, connectRouter } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import createRootReducer from '../reducers'
+import rootReducer from '../reducers'
 
 export let history = createBrowserHistory()
 
+let middlewares = [
+    routerMiddleware(history),
+    thunk,
+    logger
+]
+
+let enhancers = [applyMiddleware(...middlewares)]
+
 const persistConfig = {
-    key: 'app',
+    key: 'root',
     storage,
-    whitelist: ['app']
+    blacklist: ['router']
 }
 
+let persistedReducer = persistReducer(
+    persistConfig,
+    rootReducer(history)
+)
+
 export default () => {
-    return createStore(
-        persistReducer(persistConfig, createRootReducer(history)),
-        compose(
-            applyMiddleware(
-                routerMiddleware(history),
-                thunk,
-                logger
-            )
-        )
+    let store = createStore(
+        persistedReducer,
+        compose(...enhancers)
     )
+
+    let persistor = persistStore(store)
+    return { store, persistor }
 }
 
 

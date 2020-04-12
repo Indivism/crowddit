@@ -108,8 +108,6 @@ export let login = async ({ username, password }) => {
     
     console.log("response", response)
 
-    
-
     if(response.status === "success") {
 
         let url_associations = C.HEROKU_BACKEND + '/db/getAssociations?' + querystring.stringify({ crowddit: response.username })
@@ -117,7 +115,7 @@ export let login = async ({ username, password }) => {
             .then(res => res.json())
             .then(json => json)
         
-        console.log(data.data)
+        console.log("DATA: ", data)
         if(data.data) {
             return { type: C.LOGIN, payload: { username: response.username } }
         } else {

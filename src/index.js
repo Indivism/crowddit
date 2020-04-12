@@ -1,12 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
-import { persistStore, persistReducer } from 'redux-persist';
 import { PersistGate } from 'redux-persist/lib/storage'
-import storage from 'redux-persist/lib/storage'
-import rootReducer from './reducers/index';
-import logger from 'redux-logger'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import * as serviceWorker from './serviceWorker';
@@ -14,16 +9,19 @@ import Routes from './routes'
 import { ConnectedRouter } from 'connected-react-router'
 import configureStore, { history } from './store'
 
-let store = configureStore()
+let { store, persistor } = configureStore()
 window.store = store
-
 export let getStore = () => { return store }
+
+console.log(store, persistor)
 
 render(
   <Provider store={ store }>
+    {/* <PersistGate loading={ null } persistor={ persistor } > */}
       <ConnectedRouter history={ history }>
         <Routes />
       </ConnectedRouter>
+    {/* </PersistGate> */}
   </Provider>,
   document.getElementById('root')
 );

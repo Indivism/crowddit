@@ -14,17 +14,16 @@ import CreateAccount from './components/containers/createAccount'
 export default () => (
     <Router>
         <Switch>
-            <Route exact path="/">
-                <App />
-            </Route>
-            <Route path="/createUser">
+            <Route exact path="/createUser">
                 <CreateAccount />
             </Route>
-            <Route path="/settings">
+            <Route exact path="/settings">
                 <Settings />
             </Route>
-            <Route path="/about">
-                <img src="abdu.jpg"></img>
+            <Route exact path="/about">
+            </Route>
+            <Route path="/">
+                <App />
             </Route>
         </Switch>
     </Router>
