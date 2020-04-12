@@ -170,7 +170,7 @@ const close = db => { db.close() };
 const login = (username, password) => {
     const db = open();
     const statement = db.prepare('SELECT * FROM Credentials WHERE Username = ? AND Password = ?');
-    const data = statement.get(username, password);
+    const data = statement.get(username.toUpperCase(), password);
     close(db);
     return data;
 }
@@ -186,7 +186,7 @@ const checkUsername = username => {
 const insertUser = (username, password) => {
     const db = open();
     const statement = db.prepare('INSERT INTO Credentials(Username, Password) VALUES(?, ?)');
-    const data = statement.run(username, password);
+    const data = statement.run(username.toUpperCase(), password);
     close(db);
     return data;
 }
@@ -194,7 +194,7 @@ const insertUser = (username, password) => {
 const getAssociations = crowddit => {
     const db = open();
     const statement = db.prepare('SELECT * FROM Tokens WHERE Crowddit = ?');
-    const data = statement.get(crowddit)
+    const data = statement.get(crowddit.toUpperCase())
     close(db);
     return data;
 }
