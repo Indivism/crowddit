@@ -63,12 +63,10 @@ router.get('/auth/callback', (request, response, next) => {
                 )
             } catch(err) {
                 response
-                .status(301)
                 .redirect('https://indivism.github.io/crowddit/#/settings?error=conflict')
                 return
             }
             response
-            .status(301)
             .redirect('https://indivism.github.io/crowddit/#/settings?success=insert')
             .json(json)
         })
