@@ -28,13 +28,15 @@ let persistedReducer = persistReducer(
     rootReducer(history)
 )
 
-export default () => {
-    let store = createStore(
-        persistedReducer,
-        compose(...enhancers)
-    )
+let store = createStore(
+    persistedReducer,
+    undefined, 
+    compose(...enhancers)
+)
 
-    let persistor = persistStore(store)
+let persistor = persistStore(store)
+
+export default () => {
     return { store, persistor }
 }
 

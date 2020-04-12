@@ -1,19 +1,6 @@
 import * as C from '../constants'
 
-const INITIAL = {
-    showLoginModal: false,
-    validUsername: null,
-    cookie: document.cookie.includes('crowddit='),
-    username: document.cookie.slice(document.cookie.indexOf('crowddit') + 9),
-    invalidLoginAttempt: false,
-    createUserAlert: false,
-    page: "/",
-    initAccountAlert: false,
-    showAuthAlert: true,
-    auth: false
-}
-
-export default (state = INITIAL, action) => {
+export default (state = {}, action) => {
     switch(action.type) {
         case C.TOGGLE_LOGIN:
             return {
@@ -121,7 +108,6 @@ export default (state = INITIAL, action) => {
                 auth: false
             }
         } 
-
 
         default:
             return state

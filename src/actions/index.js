@@ -3,7 +3,6 @@ import querystring from 'query-string'
 import { getStore } from '../index'
 import { push } from 'react-router-redux'
 
-
 export let toggleLogin = () => {
     return { type: C.TOGGLE_LOGIN }
 }
@@ -89,8 +88,8 @@ export let cookie = () => ({
 
 export let logout = () => {
     document.cookie = 'crowddit' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    // getStore().dispatch(push('/crowddit'))
     window.location.href = 'https://indivism.github.io/crowddit/#/'
+    window.persistor.purge()
     return { type: C.LOGOUT }
 }
 
@@ -198,3 +197,5 @@ export let revokeAuth = async () => {
 
     return { type: C.REVOKE_AUTH }
 }
+
+export let purge = () => ({ type: C.PURGE })

@@ -13,7 +13,7 @@ const mapStateToProps = (store, ownProps) => ({
 const mapDispatchToProps = (dispatch) => {
     return {
         login: () => { dispatch(A.toggleLogin()) },
-        logout: () => { dispatch(A.logout()) },
+        logout: () => { dispatch(A.logout()); dispatch(A.purge()) },
         setPage: page => { dispatch(A.setPage(page)) }
     }
 }

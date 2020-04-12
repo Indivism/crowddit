@@ -11,17 +11,16 @@ import configureStore, { history } from './store'
 
 let { store, persistor } = configureStore()
 window.store = store
+window.persistor = persistor
 export let getStore = () => { return store }
 
 console.log(store, persistor)
 
 render(
   <Provider store={ store }>
-    {/* <PersistGate loading={ null } persistor={ persistor } > */}
       <ConnectedRouter history={ history }>
         <Routes />
       </ConnectedRouter>
-    {/* </PersistGate> */}
   </Provider>,
   document.getElementById('root')
 );
