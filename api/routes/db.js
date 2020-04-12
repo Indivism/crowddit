@@ -89,7 +89,7 @@ router.get('/getAssociations', (request, response, next) => {
 router.get('/setAssociation', (request, response, next) => {
     const { crowddit } = request.query
 
-    const data = setAssociation(crowddit.toUpperCase())
+    const data = setAssociation( crowddit.toUpperCase() )
 
     response.status(200).json({ data })
 })
@@ -213,7 +213,13 @@ const insertTokenInformation = (crowddit, accessToken, refreshToken) => {
         ON CONFLICT(Crowddit)
         DO UPDATE SET AccessToken = ?, RefreshToken = ?
     `);
-    const data = statement.run(crowddit.toUpperCase(), accessToken, refreshToken, accessToken, refreshToken);
+    const data = statement.run(
+        crowddit.toUpperCase(), 
+        encrypt(accessToken), 
+        encrypt(refreshToken), 
+        encrypt(accessToken), 
+        encrypt(refreshToken)
+    );
     close(db);
     return data;
 };

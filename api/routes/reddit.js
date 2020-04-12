@@ -58,8 +58,8 @@ router.get('/auth/callback', (request, response) => {
             try {
                 db.insertTokenInformation(
                     crowddit, 
-                    db.encrypt(json.access_token), 
-                    db.encrypt(json.refresh_token)
+                    json.access_token, 
+                    json.refresh_token
                 )
             } catch(err) {
                 response
