@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/crowddit/static/css/main.df1bad64.chunk.css",
-    "main.js": "/crowddit/static/js/main.60824a6a.chunk.js",
-    "main.js.map": "/crowddit/static/js/main.60824a6a.chunk.js.map",
+    "main.js": "/crowddit/static/js/main.2f6388ae.chunk.js",
+    "main.js.map": "/crowddit/static/js/main.2f6388ae.chunk.js.map",
     "runtime-main.js": "/crowddit/static/js/runtime-main.745c987f.js",
     "runtime-main.js.map": "/crowddit/static/js/runtime-main.745c987f.js.map",
     "static/css/2.de424728.chunk.css": "/crowddit/static/css/2.de424728.chunk.css",
     "static/js/2.3e9ea75a.chunk.js": "/crowddit/static/js/2.3e9ea75a.chunk.js",
     "static/js/2.3e9ea75a.chunk.js.map": "/crowddit/static/js/2.3e9ea75a.chunk.js.map",
     "index.html": "/crowddit/index.html",
-    "precache-manifest.492c18f3a4d8262498ed87ee8e716b17.js": "/crowddit/precache-manifest.492c18f3a4d8262498ed87ee8e716b17.js",
+    "precache-manifest.6ab4ae90a0fa84bdd7eb587705b5693c.js": "/crowddit/precache-manifest.6ab4ae90a0fa84bdd7eb587705b5693c.js",
     "service-worker.js": "/crowddit/service-worker.js",
     "static/css/2.de424728.chunk.css.map": "/crowddit/static/css/2.de424728.chunk.css.map",
     "static/css/main.df1bad64.chunk.css.map": "/crowddit/static/css/main.df1bad64.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.de424728.chunk.css",
     "static/js/2.3e9ea75a.chunk.js",
     "static/css/main.df1bad64.chunk.css",
-    "static/js/main.60824a6a.chunk.js"
+    "static/js/main.2f6388ae.chunk.js"
   ]
 }
