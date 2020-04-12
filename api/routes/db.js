@@ -206,6 +206,7 @@ const setAssociation = (crowddit, reddit) => {
 }
 
 const insertTokenInformation = (crowddit, accessToken, refreshToken) => {
+    console.log("insert")
     const db = open();
     const statement = db.prepare(`
         INSERT INTO Tokens(Crowddit, AccessToken, RefreshToken)
