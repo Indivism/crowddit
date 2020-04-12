@@ -91,7 +91,11 @@ router.get('/setAssociation', (request, response, next) => {
 
     const data = setAssociation( crowddit.toUpperCase() )
 
-    response.status(200).json({ data })
+    if(Object.keys(data).includes('Crowddit')) {
+        response.status(200).json({ message: "Reddit authenticated.", status: "success" })
+    } else {
+        response.status(200).json({ message: "Reddit is not authenticated.", status: "fail" })
+    }
 })
 
 router.get('/createUser', (request, response, next) => {
