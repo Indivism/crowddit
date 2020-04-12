@@ -224,14 +224,14 @@ const insertTokenInformation = (crowddit, accessToken, refreshToken) => {
     `);
     const data = statement.run(
         crowddit.toUpperCase(), 
-        // encrypt(accessToken), 
-        // encrypt(refreshToken), 
-        // encrypt(accessToken), 
-        // encrypt(refreshToken)
-        accessToken,
-        refreshToken,
-        accessToken,
-        refreshToken
+        encrypt(accessToken), 
+        encrypt(refreshToken), 
+        encrypt(accessToken), 
+        encrypt(refreshToken)
+        // accessToken,
+        // refreshToken,
+        // accessToken,
+        // refreshToken
     );
     close(db);
     return data;
@@ -241,6 +241,9 @@ const getTokenInformation = crowddit => {
     const db = open()
     const statement = db.prepare('SELECT AccessToken, RefreshToken FROM Tokens WHERE Crowddit = ?');
     const data = statement.get(crowddit.toUpperCase());
+    console.log(data)
+    data.RefreshToken = decrypt(data.RefreshToken)
+    data.AccessToken = decrypt(data.AccessToken)
     close(db);
     return data;
 };
