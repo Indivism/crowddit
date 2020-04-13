@@ -22,3 +22,7 @@ export let CHECK_CROWDDIT_AUTH_STATUS = 'CHECK_CROWDDIT_AUTH_STATUS'
 
 export let HEROKU_BACKEND = 'https://crowddit-backend.herokuapp.com'
 export let GH_PAGES = "https://indivism.github.io/crowddit"
+export let HEROKU = {
+    db: 'https://crowddit-backend.herokuapp.com/db',
+    reddit: 'https://crowddit-backend.herokuapp.com/reddit'
+}

@@ -20,8 +20,6 @@ const NavigationBar = (props) => {
 
     return (
     <div>
-      {props.page === "/settings" && <Redirect to="/settings" />}
-      {props.page === "/about" && <Redirect to="/about" />}
       <Navbar color="light" light expand="md">
         <NavbarBrand href={'https://indivism.github.io/crowddit/'}>crowddit</NavbarBrand>
         <NavbarToggler onClick={toggle} />

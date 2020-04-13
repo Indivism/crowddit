@@ -6,9 +6,9 @@ import Revoke from '../../containers/revoke'
 
 class Settings extends React.Component {
 
-    componentDidMount() {
-        this.props.onMount()
-        console.log("CHECK:",this.props)
+    componentDidUpdate() {
+        this.props.onUpdate()
+        console.log("CHECK:", this.props)
     }
 
     render() {
