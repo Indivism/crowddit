@@ -53,7 +53,7 @@ router.get('/auth/callback', (request, response, next) => {
     if(code) {
         fetch('https://www.reddit.com/api/v1/access_token', options)
         .then(res => res.json())
-        .then(async json => {
+        .then(json => {
             console.log(crowddit, json.access_token, json.refresh_token)
             try {
                 db.insertTokenInformation(
@@ -64,6 +64,7 @@ router.get('/auth/callback', (request, response, next) => {
             } catch(err) {
                 response
                 .redirect('https://indivism.github.io/crowddit/#/settings?error=conflict')
+                .json(err)
                 return
             }
             response
