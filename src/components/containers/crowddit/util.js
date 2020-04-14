@@ -4,7 +4,11 @@ import {
     CardSubtitle, CardBody
   } from 'reactstrap';
 
-export let cardGenerator = details => (
+export let generateJSX = crowds => {
+    console.log("CROWDS: ", crowds)
+}
+
+let cardGenerator = details => (
     <Card>
         <CardBody>
             <CardTitle>{ details.subreddit }</CardTitle>

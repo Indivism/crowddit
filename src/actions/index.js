@@ -97,11 +97,7 @@ export let login = async ({ username, password }) => {
 
     let url = C.HEROKU.db + "/login?" + querystring.stringify({username, password})
 
-    let options = {
-        method: 'GET'
-    }
-
-    let response = await fetch(url, options)
+    let response = await fetch(url)
         .then(res => res.json())
         .then(json => json)
     
@@ -109,14 +105,13 @@ export let login = async ({ username, password }) => {
 
     if(response.status === "success") {
         let url_associations = C.HEROKU.db + '/getAssociations?' + querystring.stringify({ crowddit: response.username })
-        let data = await fetch(url_associations, options)
+        let data = await fetch(url_associations)
             .then(res => res.json())
             .then(json => json)
         
-        console.log("DATA: ", data)
         if(data.status === "success") {
+            getCrowds(response.username)
             getStore().dispatch({ type: C.AUTH_SUCCESS, payload: "login" })
-            getCrowds()
             return { type: C.LOGIN, payload: { username: response.username } }
         } else {
             return { type: C.GET_ASSOCIATIONS, payload: { username: response.username } }
@@ -175,6 +170,7 @@ export let returnFromReddit = async () => {
     
     // Success status comes back from db -> token is stored within db
     if(data.status === "success") {
+        getCrowds(username)
         return { type: C.AUTH_SUCCESS, payload: "insert" }
     }
 
@@ -208,15 +204,14 @@ export let revokeAuth = async () => {
     return { type: C.REVOKE_AUTH }
 }
 
-export let getCrowds = () => {
+export let getCrowds = async crowddit => {
 
-    let crowddit = getStore().getState().app.username
-
-    let url = C.HEROKU.reddit + '/getCrowds?' + querystring.stringify({ crowddit })
+    let url = C.HEROKU.reddit + '/getCrowds?' + querystring.stringify({ crowddit: crowddit || getStore().getState().app.username })
     
-    fetch(url)
+    let crowds = await fetch(url)
         .then(res => res.json())
-        .then(json => console.log(json))
+        .then(json => json)
     
+    getStore().dispatch({ type: C.GET_CROWDS, payload: crowds }) 
 }
 

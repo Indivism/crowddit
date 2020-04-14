@@ -2,14 +2,14 @@ import { connect } from 'react-redux'
 import Crowddit from '../../presentationals/crowddit'
 import * as C from '../../../constants' 
 import * as A from '../../../actions'
-import * as util from './util'
 
 const mapStateToProps = (store, ownProps) => ({
-    loggedIn: store.app.cookie
+    loggedIn: store.app.cookie,
+    crowds: store.app.crowds
 })
 
 const mapDispatchToProps = (dispatch) => ({
-
+    refreshCrowds: async () => { await A.getCrowds() }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Crowddit)

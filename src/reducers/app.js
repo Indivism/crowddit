@@ -118,7 +118,13 @@ export default (state = INITIAL, action) => {
                 ...state,
                 auth: false
             }
-        } 
+        }
+        case C.GET_CROWDS: {
+            return {
+                ...state,
+                crowds: action.payload
+            }
+        }
 
         default:
             return state
