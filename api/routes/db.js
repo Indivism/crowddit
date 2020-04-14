@@ -223,19 +223,15 @@ const insertTokenInformation = (crowddit, accessToken, refreshToken) => {
         DO UPDATE SET AccessToken = ?, RefreshToken = ?
     `);
 
-    const encryptedAccessToken = encrypt(accessToken)
-    const encryptedRefreshToken = encrypt(refreshToken)
+    const encryptedAccessToken = encrypt(accessToken).encryptedData
+    const encryptedRefreshToken = encrypt(refreshToken).encryptedData
 
     const data = statement.run(
         crowddit.toUpperCase(), 
-        // encryptedAccessToken,
-        // encryptedRefreshToken,
-        // encryptedAccessToken,
-        // encryptedRefreshToken
-        accessToken,
-        refreshToken,
-        accessToken,
-        refreshToken
+        encryptedAccessToken,
+        encryptedRefreshToken,
+        encryptedAccessToken,
+        encryptedRefreshToken
     );
     close(db);
     return data;
