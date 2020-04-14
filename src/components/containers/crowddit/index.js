@@ -9,8 +9,7 @@ const mapStateToProps = (store, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+
 })
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Crowddit)
