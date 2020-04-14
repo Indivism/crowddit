@@ -10,6 +10,11 @@ const db = require('./db');
 
 const clientId = 'r9CTq6ZW0UARpg'
 const clientSecret = 'hkKsFTiWhzC8mjooneV-bxRQSDA'
+const snoowrapConfig = {
+    clientId,
+    clientSecret,
+    userAgent: 'crowddit'
+}
 
 router.get('/auth', (request, response, next) => {
     var crowddit = request.query['crowddit']
@@ -89,6 +94,22 @@ router.get('/auth/callback', (request, response, next) => {
         });
 })
 
+router.get('/getCrowds', (request, response, next) => {
+    
+    const crowddit = request.query.crowddit
+    // const { RefreshToken, AccessToken } = db.getTokenInformation(crowddit)
+    RefreshToken = "22316473-F5jCEV-F5QTMtQbidbRCDYq7Ii0"
+    console.log("here", crowddit, RefreshToken)
+    const r = new snoowrap({
+        ...snoowrapConfig,
+        refreshToken: RefreshToken
+    })
+
+    r.getSubscriptions({limit: 10}).then(subscriptions => {
+        response.status(200).json(getCrowdsHelper(subscriptions))
+    })
+})
+
 // reference end point
 router.get('/test', (request, response, next) => {
 
@@ -139,5 +160,17 @@ router.get('/revoke', async (request, response, next) => {
     await fetch(url, options)
     response.status(200).json({message: "Revoke attempted"})
 })
+
+const getCrowdsHelper = subscriptions => {
+    return subscriptions.map(sub => ({
+        subreddit: sub.display_name_prefixed,
+        url: sub.url,
+        title: sub.title,
+        primaryColor: sub.primary_color,
+        bannerBackgroundColor: sub.banner_background_color,
+        headerTitle: sub.header_title,
+        })
+    )
+}
 
 module.exports = router;
