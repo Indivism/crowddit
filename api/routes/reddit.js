@@ -97,8 +97,7 @@ router.get('/auth/callback', (request, response, next) => {
 router.get('/getCrowds', (request, response, next) => {
     
     const crowddit = request.query.crowddit
-    // const { RefreshToken, AccessToken } = db.getTokenInformation(crowddit)
-    RefreshToken = "22316473-F5jCEV-F5QTMtQbidbRCDYq7Ii0"
+    const { RefreshToken } = db.getTokenInformation(crowddit)
     console.log("here", crowddit, RefreshToken)
     const r = new snoowrap({
         ...snoowrapConfig,
