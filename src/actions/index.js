@@ -116,6 +116,7 @@ export let login = async ({ username, password }) => {
         console.log("DATA: ", data)
         if(data.status === "success") {
             getStore().dispatch({ type: C.AUTH_SUCCESS, payload: "login" })
+            getCrowds()
             return { type: C.LOGIN, payload: { username: response.username } }
         } else {
             return { type: C.GET_ASSOCIATIONS, payload: { username: response.username } }
@@ -145,13 +146,9 @@ export let setPage = page => {
 
 export let auth = async crowddit => {
 
-    let options = {
-        method: 'GET'
-    }
-
     let url = C.HEROKU.reddit + '/auth?' + querystring.stringify({ crowddit })
 
-    fetch(url, options)
+    fetch(url)
         .then(res => res.json())
         .then(json => {
             if(json.auth_url) {
@@ -159,9 +156,7 @@ export let auth = async crowddit => {
             }
         })
 
-    return {
-        type: C.AUTH
-    }
+    return { type: C.AUTH }
 }
 
 export let dismissAuthAlert = () => ({ type: C.DISMISS_AUTH_ALERT })
@@ -220,8 +215,8 @@ export let getCrowds = () => {
     let url = C.HEROKU.reddit + '/getCrowds?' + querystring.stringify({ crowddit })
     
     fetch(url)
-    .then(res => res.json())
-    .then(json => json)
+        .then(res => res.json())
+        .then(json => console.log(json))
     
 }
 
