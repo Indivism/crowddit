@@ -5,7 +5,8 @@ import * as A from '../../../actions'
 
 const mapStateToProps = (store, ownProps) => ({
     loggedIn: store.app.cookie,
-    crowds: store.app.crowds
+    crowds: store.app.crowds,
+    subredditSet: store.app.subredditSet
 })
 
 const mapDispatchToProps = (dispatch) => ({

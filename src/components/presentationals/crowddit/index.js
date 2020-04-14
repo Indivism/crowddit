@@ -7,8 +7,7 @@ class Crowddit extends React.Component {
 
     componentDidUpdate(prevProps) {
         console.log("check these props: ", prevProps, this.props)
-        if(prevProps.crowds !== this.props.crowds) {
-            console.log(prevProps.crowds == this.props.crowds)
+        if(prevProps.subredditSet !== this.props.subredditSet) {
             util.generateJSX(this.props.crowds)
         }
     }

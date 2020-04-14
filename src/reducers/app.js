@@ -10,7 +10,9 @@ const INITIAL = {
     page: "/",
     initAccountAlert: false,
     showAuthAlert: true,
-    auth: false
+    auth: false,
+    crowds: null,
+    subredditSet: []
 }
 
 export default (state = INITIAL, action) => {
@@ -122,7 +124,8 @@ export default (state = INITIAL, action) => {
         case C.GET_CROWDS: {
             return {
                 ...state,
-                crowds: action.payload
+                crowds: action.payload.subscriptions,
+                subredditSet: action.payload.subreddits
             }
         }
 
