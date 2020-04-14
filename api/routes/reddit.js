@@ -62,9 +62,9 @@ router.get('/auth/callback', (request, response, next) => {
                     json.refresh_token
                 )
             } catch(err) {
+                console.log("INSERT ERROR: ", err)
                 response
                 .redirect('https://indivism.github.io/crowddit/#/settings?error=conflict')
-                .json(err)
                 return
             }
             response
