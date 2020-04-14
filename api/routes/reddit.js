@@ -161,15 +161,20 @@ router.get('/revoke', async (request, response, next) => {
 })
 
 const getCrowdsHelper = subscriptions => {
-    return subscriptions.map(sub => ({
-        subreddit: sub.display_name_prefixed,
-        url: sub.url,
-        title: sub.title,
-        primaryColor: sub.primary_color,
-        bannerBackgroundColor: sub.banner_background_color,
-        headerTitle: sub.header_title,
-        })
+    let subreddits = []
+    subscriptions.map(sub => {
+        subreddits.push(sub.display_name_prefixed)
+        return {    
+            subreddit: sub.display_name_prefixed,
+            url: sub.url,
+            title: sub.title,
+            primaryColor: sub.primary_color,
+            bannerBackgroundColor: sub.banner_background_color,
+            headerTitle: sub.header_title
+            }
+        }
     )
+    return { subreddits, subscriptions }
 }
 
 module.exports = router;
