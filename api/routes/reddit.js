@@ -104,7 +104,7 @@ router.get('/getCrowds', (request, response, next) => {
         refreshToken: RefreshToken
     })
 
-    r.getSubscriptions({limit: 10}).then(subscriptions => {
+    r.getSubscriptions({limit: 5}).then(subscriptions => {
         response.status(200).json(getCrowdsHelper(subscriptions))
     })
 })
