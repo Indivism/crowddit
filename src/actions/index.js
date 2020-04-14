@@ -210,7 +210,7 @@ export let getCrowds = async crowddit => {
     
     let crowds = await fetch(url)
         .then(res => res.json())
-        .then(json => json)
+        .then(json => console.log("IDK MAN", json))
     
     getStore().dispatch({ type: C.GET_CROWDS, payload: crowds }) 
 }

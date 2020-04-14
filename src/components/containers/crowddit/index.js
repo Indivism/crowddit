@@ -9,7 +9,7 @@ const mapStateToProps = (store, ownProps) => ({
     subredditSet: store.app.subredditSet
 })
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = () => ({
     refreshCrowds: async () => { await A.getCrowds() }
 })
 

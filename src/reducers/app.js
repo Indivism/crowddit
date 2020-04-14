@@ -124,7 +124,7 @@ export default (state = INITIAL, action) => {
         case C.GET_CROWDS: {
             return {
                 ...state,
-                crowds: action.payload.subscriptions,
+                crowds: action.payload.subs,
                 subredditSet: action.payload.subreddits
             }
         }

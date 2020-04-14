@@ -5,7 +5,10 @@ import {
   } from 'reactstrap';
 
 export let generateJSX = crowds => {
-    console.log("CROWDS: ", crowds)
+    for(let crowd in crowds) {
+        console.log("i", crowd)
+        cardGenerator(crowd)
+    }
 }
 
 let cardGenerator = details => (
