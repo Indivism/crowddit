@@ -13,10 +13,9 @@ class Crowddit extends React.Component {
     render() {
         console.log("JSX:", this.props.jsx)
         return (
-            <div className="container">
+            this.props.loggedIn && <div className="container">
                 <Button onClick={() => this.props.refreshCrowds()}>Refresh</Button>
                 <div style={{paddingTop: "2rem", paddingBottom: "2rem"}}>{util.generateJSX(this.props.crowds || [])}</div>
-               
             </div>
         )
     } 
