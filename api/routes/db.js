@@ -242,10 +242,10 @@ const getTokenInformation = crowddit => {
     const statement = db.prepare('SELECT AccessToken, RefreshToken FROM Tokens WHERE Crowddit = ?');
     const data = statement.get(crowddit.toUpperCase());
     console.log(data)
-    data.RefreshToken = decrypt(data.RefreshToken)
-    data.AccessToken = decrypt(data.AccessToken)
+    const RefreshToken = decrypt(data.RefreshToken)
+    const AccessToken = decrypt(data.AccessToken)
     close(db);
-    return data;
+    return { RefreshToken, AccessToken };
 };
 
 // Reads
@@ -291,8 +291,7 @@ let encrypt = text => {
 }
    
 let decrypt = text => {
-    let iv = Buffer.from(text.iv, 'hex');
-    let encryptedText = Buffer.from(text.encryptedData, 'hex');
+    let encryptedText = Buffer.from(text, 'hex');
     let decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
     let decrypted = decipher.update(encryptedText);
     decrypted = Buffer.concat([decrypted, decipher.final()]);
