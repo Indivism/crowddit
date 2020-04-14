@@ -11,8 +11,9 @@ const INITIAL = {
     initAccountAlert: false,
     showAuthAlert: true,
     auth: false,
-    crowds: null,
-    subredditSet: []
+    crowds: undefined,
+    subredditSet: [],
+    crowdJSX: []
 }
 
 export default (state = INITIAL, action) => {
@@ -126,6 +127,12 @@ export default (state = INITIAL, action) => {
                 ...state,
                 crowds: action.payload.subs,
                 subredditSet: action.payload.subreddits
+            }
+        }
+        case C.CROWDS_CARD_JSX: {
+            return {
+                ...state,
+                crowdJSX: action.payload
             }
         }
 
