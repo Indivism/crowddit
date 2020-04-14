@@ -213,3 +213,15 @@ export let revokeAuth = async () => {
     return { type: C.REVOKE_AUTH }
 }
 
+export let getCrowds = () => {
+
+    let crowddit = getStore().getState().app.username
+
+    let url = C.HEROKU.reddit + '/getCrowds?' + querystring.stringify({ crowddit })
+    
+    fetch(url)
+    .then(res => res.json())
+    .then(json => json)
+    
+}
+

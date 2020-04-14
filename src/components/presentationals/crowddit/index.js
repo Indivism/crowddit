@@ -1,21 +1,13 @@
 import React from 'react'
-import { Media } from 'reactstrap';
+import { Card, Button, CardImg, CardTitle, CardText, CardColumns,
+    CardSubtitle, CardBody } from 'reactstrap';
 
-export default props => (
-    <div>
-        {props.loggedIn && <div>Welcome to Crowddit</div>}
-        <Media>
-            <Media left>
-                <Media object src="https://www.w3schools.com/images/w3schools_green.jpg">
+class Crowddit extends React.Component {
+    render() {
+        return (
+            <div>hey</div>
+        )
+    }
+}
 
-                </Media>
-                <Media body>
-                    <Media heading>
-                        Reddit
-                    </Media>
-                    blah
-                </Media>
-            </Media>
-        </Media>
-    </div>
-)
+export default Crowddit
