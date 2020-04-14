@@ -103,7 +103,8 @@ export default (state = INITIAL, action) => {
         case C.AUTH_SUCCESS: {
             return {
                 ...state,
-                auth: true
+                auth: true,
+                initAccountAlert: false
             }
         }
         case C.AUTH_FAIL: {
