@@ -162,7 +162,7 @@ router.get('/revoke', async (request, response, next) => {
 
 const getCrowdsHelper = subscriptions => {
     let subreddits = []
-    subscriptions.map(sub => {
+    let subs = subscriptions.map(sub => {
         subreddits.push(sub.display_name_prefixed)
         return {    
             subreddit: sub.display_name_prefixed,
@@ -174,7 +174,7 @@ const getCrowdsHelper = subscriptions => {
             }
         }
     )
-    return { subreddits, subscriptions }
+    return { subreddits, subs }
 }
 
 module.exports = router;
