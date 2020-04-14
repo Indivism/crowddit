@@ -222,12 +222,16 @@ const insertTokenInformation = (crowddit, accessToken, refreshToken) => {
         ON CONFLICT(Crowddit)
         DO UPDATE SET AccessToken = ?, RefreshToken = ?
     `);
+
+    const encryptedAccessToken = encrypt(accessToken)
+    const encryptedRefreshToken = encrypt(refreshToken)
+
     const data = statement.run(
         crowddit.toUpperCase(), 
-        encrypt(accessToken), 
-        encrypt(refreshToken), 
-        encrypt(accessToken), 
-        encrypt(refreshToken)
+        encryptedAccessToken,
+        encryptedRefreshToken,
+        encryptedAccessToken,
+        encryptedRefreshToken
     );
     close(db);
     return data;
