@@ -139,7 +139,7 @@ router.get('/testGetPosts', (request, response, next) => {
         refreshToken: RefreshToken // will change
     })
 
-    r.getMe().getSavedContent().then(posts => {
+    r.getMe().getSavedContent({limit: 50}).then(posts => {
         response.status(200).json(posts)
     })
 })
