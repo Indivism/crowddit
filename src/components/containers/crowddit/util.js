@@ -11,7 +11,8 @@ import {
 
 export let generateJSX = crowds => {
     let jsx = crowds.map(crowd => cardGenerator(crowd))
-    return <div className="d-flex justify-content-around">{jsx}</div>
+    console.log("HI HI HI", jsx)
+    return jsx
 }
 
 let cardGenerator = crowd => {
@@ -25,14 +26,13 @@ let cardGenerator = crowd => {
     }
     console.log("L", L)
     return (<div style={{margin: "1rem"}}>
-        <Card style={{height: "15rem",  backgroundColor: crowd.bannerBackgroundColor, color}}>
+        <Card style={{backgroundColor: crowd.bannerBackgroundColor, color}}>
             <CardBody>
                 <CardTitle>{ crowd.title }</CardTitle>
                 <CardSubtitle>{ crowd.subreddit }</CardSubtitle>
                 <CardText>{ crowd.headerTitle }</CardText>
                 <Button>Button</Button>
             </CardBody>
-            
         </Card>
     </div>)
 }
