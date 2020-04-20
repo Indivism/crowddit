@@ -195,4 +195,19 @@ const getCrowdsHelper = subscriptions => {
     return { subreddits, subs }
 }
 
+const getSavedPostHelper = posts => {
+    let savedPostAuthors = []
+    let post = posts.map(post => { 
+        savedPostAuthors.push(post.auth_fullName)
+        return {
+            authorName: post.auth_fullName,
+            title: post.title,
+            selftext: post.selftext,
+            score: post.score,
+            createdDate: post.created,
+            url: post.url,
+        }
+    })
+}
+
 module.exports = router;
