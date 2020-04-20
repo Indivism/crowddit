@@ -128,6 +128,24 @@ router.get('/test', (request, response, next) => {
     }))
 })
 
+router.get('/testGetPosts', (request, response, next) => {
+    var crowddit = request.query['crowddit']
+    const { RefreshToken, AccessToken } = db.getTokenInformation(crowddit);
+
+    const r = new snoowrap({
+        clientId, // stay constant
+        clientSecret,
+        userAgent: 'crowddit', // doesn't matter
+        refreshToken: RefreshToken // will change
+    })
+
+    r.getMe().getSavedContent().then(posts => {
+        response.status(200).json(posts)
+    })
+})
+
+
+
 router.get('/revoke', async (request, response, next) => {
     const crowddit = request.query['crowddit']
     try {
